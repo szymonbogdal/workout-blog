@@ -17,13 +17,10 @@ class Database{
   }
 
   private function createDatabase(){
-    $slq = "CREATE DATABASE IF NOT EXISTS $this->db";
-    $this->conn->query($slq);
-    if($this->conn->error){
-      throw new Exception("Error creating database: ".$this->conn->error);
-    }
+    $sql = "CREATE DATABASE IF NOT EXISTS $this->db";
+    $this->executeQuery($sql);
   }
-
+  
   public static function getInstance(){
     if(self::$instance === null){
       self::$instance = new Database();
@@ -33,5 +30,11 @@ class Database{
 
   public function getConnection(){
     return $this->conn;
+  }
+  private function executeQuery($sql) {
+    $this->conn->query($sql);
+    if($this->conn->error){
+      throw new Exception("Error creating database: ".$this->conn->error);
+    }
   }
 }
