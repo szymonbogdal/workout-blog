@@ -6,6 +6,7 @@ class Router{
     "/api/register" => ["controller" => "AuthController", "method" => "register", 'type'=>'api'], 
     
     "/" => ["controller" => "PageController", "method" => "home", 'type'=>'page'],
+    "/login" => ["controller" => "PageController", "method" => "login", 'type'=>'page'],
   ]; 
 
   public function dispatch($action) {
