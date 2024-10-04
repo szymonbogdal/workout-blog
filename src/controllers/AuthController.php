@@ -21,4 +21,20 @@ class AuthController{
     $password = password_hash($password, PASSWORD_BCRYPT);
     return $this->user->newUser($username, $password);
   }
+
+  public function login(){
+    $username = $_POST['username'] ?? null;
+    $password = $_POST['password'] ?? null;
+    if(!isset($username) || !isset($password)){
+      return ['status'=>"error", 'message'=>"Missing username or password parameter.'"];
+    }
+    $user =  $this->user->getUser($username);
+    if(!isset($user['username']) || !isset($user['password'])){
+      return ['status'=>"error", 'message'=>"Invaild username or password."];
+    }
+    if(!password_verify($password, $user['password'])){
+      return ['status'=>"error", 'message'=>"Invaild username or password."];
+    }
+    return ['status'=>"success", 'message'=>"User $username logged in."];
+  }
 }
