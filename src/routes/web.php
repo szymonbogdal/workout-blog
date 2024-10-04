@@ -4,6 +4,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
 class Router{
   private $routes = [ 
     "/api/register" => ["controller" => "AuthController", "method" => "register", 'type'=>'api'], 
+    "/api/login" => ["controller" => "AuthController", "method" => "login", 'type'=>'api'], 
     
     "/" => ["controller" => "PageController", "method" => "home", 'type'=>'page'],
     "/login" => ["controller" => "PageController", "method" => "login", 'type'=>'page'],
