@@ -17,7 +17,7 @@ class Router{
       if(!class_exists($controllerName)){
         throw new Exception("Controller $controllerName not found");
       }
-      $controller = $controllerName::getInstance();
+      $controller = new $controllerName();
       if(!method_exists($controller, $method)){
         throw new Exception("Method $method not found in $controllerName");
       }
