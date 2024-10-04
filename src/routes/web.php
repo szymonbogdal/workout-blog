@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../controllers/PageController.php';
+require_once __DIR__ . '/../controllers/AuthController.php';
 class Router{
   private $routes = [ 
     "/" => ["controller" => "PageController", "method" => "home", 'type'=>'page'],
