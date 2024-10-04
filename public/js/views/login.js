@@ -24,8 +24,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   swapAction.addEventListener('click', () => {
     title.innerHTML = isLogin ? "Register" : "Login";
-    swapMsg.innerHTML = isLogin ? "Don't have account?" : "Already have account?";
-    swapAction.innerHTML = isLogin ? "Create account" : "Log in";
+    swapMsg.innerHTML = isLogin ? "Already have account?" : "Don't have account?";
+    swapAction.innerHTML = isLogin ? "Log in" : "Create account";
     submitBtn.innerHTML = isLogin ? "Register" : "Login";
     responseMsg.innerHTML = "";
     isLogin = !isLogin;
