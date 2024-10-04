@@ -4,5 +4,8 @@ RewriteEngine On
 # Set the base directory
 RewriteBase /workout_blog/
 
-# Redirect all requests to index.php
+# Allow direct access to public directory
+RewriteRule ^public/ - [L]
+
+# Redirect other requests to index.php
 RewriteRule ^ index.php [L]
