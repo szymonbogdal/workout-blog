@@ -17,4 +17,17 @@ class User{
       return ["status"=>"failed", "message"=>$e->getMessage()];
     }
   }
+
+  public function getUser($username){
+    $sql =  "SELECT * FROM users WHERE username = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bind_param('s', $username);
+    try{
+      $stmt->execute();
+      $result = $stmt->get_result();
+      return $result->fetch_assoc();
+    }catch(mysqli_sql_exception $e){
+      return ["status"=>"failed", "message"=>$e->getMessage()];
+    }
+  }
 }
