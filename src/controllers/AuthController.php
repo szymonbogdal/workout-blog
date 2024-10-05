@@ -45,4 +45,12 @@ class AuthController{
     $_SESSION['username'] = $user['username'];
     return ['status'=>"success", 'message'=>"User $username logged in."];
   }
+  public function logout(){
+    if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
+      return ['status'=>"error", 'message'=>"There is no logged user."];
+    }
+    session_unset();
+    session_destroy();
+    return ['status'=>"success", 'message'=>"User logged out."];
+  }
 }
