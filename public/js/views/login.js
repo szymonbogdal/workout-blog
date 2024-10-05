@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const formData = new FormData(form);
     const url = `http://localhost/workout_blog/api/${isLogin ? "login" : "register"}`;
     const result = await apiCall(url, "POST", formData);
-    if(result.status == 'success'){
-      responseMsg.innerHTML = "Your account has been created. You can log in now."
+    if(isLogin && result?.status == 'success'){
+      window.location.href = '/workout_blog';
     }else{
-      responseMsg.innerHTML = "Something wen wrong. Try again later";
+      responseMsg.innerHTML = result.message ? result.message : "Something went wrong. Try again later";
     }
   });
 
