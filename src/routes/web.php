@@ -5,6 +5,7 @@ class Router{
   private $routes = [ 
     "/api/register" => ["controller" => "AuthController", "method" => "register", 'type'=>'api'], 
     "/api/login" => ["controller" => "AuthController", "method" => "login", 'type'=>'api'], 
+    "/api/logout" => ["controller" => "AuthController", "method" => "logout", 'type'=>'api'], 
     
     "/" => ["controller" => "PageController", "method" => "home", 'type'=>'page'],
     "/login" => ["controller" => "PageController", "method" => "login", 'type'=>'page'],
