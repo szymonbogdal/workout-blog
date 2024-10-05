@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once __DIR__ . "/src/routes/web.php";
 
 $requestUri = $_SERVER['REQUEST_URI'];
