@@ -17,6 +17,7 @@ class Database{
 
     $this->createUsersTable();
     $this->createPostsTable();
+    $this->createPostLikesTable();
   }
 
   private function createDatabase(){
@@ -42,6 +43,15 @@ class Database{
       week_days INT UNSIGNED NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
+    $this->executeQuery($sql);
+  }
+
+  private function createPostLikesTable(){
+    $sql = "CREATE TABLE IF NOT EXISTS post_likes(
+      id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+      post_id INT UNSIGNED NOT NULL,
+      user_id INT UNSIGNED NOT NULL
     )";
     $this->executeQuery($sql);
   }
