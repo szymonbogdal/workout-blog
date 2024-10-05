@@ -7,6 +7,9 @@ class AuthController{
   }
 
   public function register(){
+    if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
+      return ['status'=>"error", 'message'=>"User is already logged.'"];
+    }
     $username = $_POST['username'] ?? null;
     $password = $_POST['password'] ?? null;
     if(!isset($username) || !isset($password)){
@@ -23,6 +26,9 @@ class AuthController{
   }
 
   public function login(){
+    if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
+      return ['status'=>"error", 'message'=>"User is already logged.'"];
+    }
     $username = $_POST['username'] ?? null;
     $password = $_POST['password'] ?? null;
     if(!isset($username) || !isset($password)){
@@ -35,6 +41,8 @@ class AuthController{
     if(!password_verify($password, $user['password'])){
       return ['status'=>"error", 'message'=>"Invaild username or password."];
     }
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['username'] = $user['username'];
     return ['status'=>"success", 'message'=>"User $username logged in."];
   }
 }
