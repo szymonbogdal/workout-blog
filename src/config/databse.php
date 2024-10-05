@@ -16,6 +16,7 @@ class Database{
     $this->conn->select_db($this->db);
 
     $this->createUsersTable();
+    $this->createPostsTable();
   }
 
   private function createDatabase(){
@@ -28,6 +29,19 @@ class Database{
       id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       username VARCHAR(50) NOT NULL UNIQUE,
       password VARCHAR(255) NOT NULL
+    )";
+    $this->executeQuery($sql);
+  }
+
+  private function createPostsTable(){
+    $sql = "CREATE TABLE IF NOT EXISTS posts(
+      id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+      user_id INT UNSIGNED NOT NULL,
+      title VARCHAR(255) NOT NULL,
+      body TEXT NOT NULL,
+      week_days INT UNSIGNED NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )";
     $this->executeQuery($sql);
   }
