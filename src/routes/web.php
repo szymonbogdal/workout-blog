@@ -1,11 +1,13 @@
 <?php
 require_once __DIR__ . '/../controllers/PageController.php';
 require_once __DIR__ . '/../controllers/AuthController.php';
+require_once __DIR__ . '/../controllers/PostController.php';
 class Router{
   private $routes = [ 
     "/api/register" => ["controller" => "AuthController", "method" => "register", 'type'=>'api'], 
     "/api/login" => ["controller" => "AuthController", "method" => "login", 'type'=>'api'], 
     "/api/logout" => ["controller" => "AuthController", "method" => "logout", 'type'=>'api'], 
+    "/api/posts" => ["controller" => "PostController", "method" => "posts", 'type'=>'api'], 
     
     "/" => ["controller" => "PageController", "method" => "home", 'type'=>'page'],
     "/login" => ["controller" => "PageController", "method" => "login", 'type'=>'page'],
