@@ -1,0 +1,150 @@
+.container{
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+}
+.sidebar{
+  padding: 1rem 2rem;
+  background-color: #333333;
+  color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 2rem);
+  position: sticky;
+  top: 0;
+}
+.sidebar__title{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.input{
+  background-color:#555555;
+  border-radius: 25px;
+  border: none;
+  color: #f8f9fa;
+  width: calc(100% - 2rem);
+}
+.input--main{
+  padding: 0.5rem 1rem;
+  font-size: 1.15rem;
+}
+.filters__header{
+  margin: 1.5rem 0;
+  font-size: 1.5rem;
+}
+.filters__subheader{
+  margin: 0.5rem 0;
+  font-size: 1.25rem;
+}
+.btn-group{
+  display: flex;
+}
+.btn-difficulty{
+  background-color: #555555;
+  border: none;
+  color: #f8f9fa;
+  padding: 0.25rem 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.btn-difficulty:hover{
+  background-color: #777777;
+}
+.btn-difficulty:nth-of-type(1){
+  border-radius: 25px 0 0 25px;
+}
+.btn-difficulty:nth-of-type(2){
+  border-left: solid #333333 0.15rem;
+  border-right: solid #333333 0.15rem;
+}
+.btn-difficulty:nth-of-type(3){
+  border-radius: 0 25px 25px 0;
+}
+.input--secondary{
+  padding: 0.35rem 1rem;
+  font-size: 1rem;
+}
+.sort-select{
+  background-color:#555555;
+  border-radius: 25px;
+  border: none;
+  color: #f8f9fa;
+  width: 100%;
+  padding: 0.35rem 1rem;
+  font-size: 1rem;
+  appearance: none;
+}
+.user-data{
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.separator{
+  width: 100%;
+}
+.profile-link{
+  margin: 0.25rem;
+  font-size: 1.15rem;
+}
+
+
+.body{
+  width: 100%;
+  background-color: #e9ecef;
+}
+.workout{
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  width: 75%;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  padding: 1.5rem 2rem;
+  margin-top: 3rem;
+}
+.workout__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__tilte{
+  font-size: 2.5rem;
+}
+.header__description{
+  display: flex;
+}
+.header__likes-button{
+  border: none;
+  border-radius: 50%;
+  background-color: #333333;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.25rem;
+  color: #f8f9fa;
+}
+.header__likes-count{
+  text-align: center;
+  font-weight: lighter;
+}
+.header__description-item{
+  color: #777777;
+  margin-left: 0.5rem;
+}
+.workout__container{
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+.workout__day{
+  background-color: #e9ecef;
+  border-radius: 12px;
+  padding: 0.25rem 0.5rem;
+}
+.workout__day-exercise{
+  margin-left: 1.5rem;
+}
