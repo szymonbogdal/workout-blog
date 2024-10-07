@@ -16,6 +16,7 @@ class PageController{
     }
     $title = "Login";
     $js = "login.js";
+    $css = "login.css";
     $content = __DIR__ . "/../views/login.php";
     require __DIR__ . "/../views/layout.php";
   }
