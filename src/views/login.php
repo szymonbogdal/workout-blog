@@ -5,7 +5,7 @@
   <input class="form__input" name="username" id="username" type="text" required>
   <label class="form__label" for="password">Password</label>
   <input class="form__input" name="password" id="password" type="password" required>
-  <button class="form__submit" type="submit" id="submitButton">Log in</button>
+  <button class="form__submit" type="submit" id="submitButton">Login</button>
   </form>
   <p class="auth__resposne" id="responseMessage"></p>
   <div class="auth__footer">
