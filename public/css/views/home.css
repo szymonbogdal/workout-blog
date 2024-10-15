@@ -231,8 +231,13 @@
   cursor: pointer;
   border-radius: 10px;
   width: 100%;
-  margin: 1rem 0;
+  margin-top: 1rem;
 }
 .form-button:hover{
   background-color: #777777;
+}
+.response-container{
+  grid-column: 1/-1;
+  gap: 0.1rem;
+  text-align: center;
 }

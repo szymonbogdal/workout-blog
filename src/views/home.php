@@ -123,8 +123,10 @@
           <label class="form-label" for="day7">Day 7</label>
           <textarea class="form-input form-input--textarea" id="day7" name="workoutDays[]"></textarea>
         </div>
-        
         <button class="form-button" type="submit">Add workout</button>
+        <div class="response-container">
+          <p class="response-message" id="responseMessage"></p>
+        </div>
       </form>
     </div>
   </div>
