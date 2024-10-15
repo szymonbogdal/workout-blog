@@ -16,8 +16,8 @@ class Database{
     $this->conn->select_db($this->db);
 
     $this->createUsersTable();
-    $this->createPostsTable();
-    $this->createPostLikesTable();
+    $this->createWorkoutsTable();
+    $this->createWorkoutLikesTable();
   }
 
   private function createDatabase(){
@@ -34,8 +34,8 @@ class Database{
     $this->executeQuery($sql);
   }
 
-  private function createPostsTable(){
-    $sql = "CREATE TABLE IF NOT EXISTS posts(
+  private function createWorkoutsTable(){
+    $sql = "CREATE TABLE IF NOT EXISTS workouts(
       id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       user_id INT UNSIGNED NOT NULL,
       title VARCHAR(255) NOT NULL,
@@ -47,10 +47,10 @@ class Database{
     $this->executeQuery($sql);
   }
 
-  private function createPostLikesTable(){
-    $sql = "CREATE TABLE IF NOT EXISTS post_likes(
+  private function createWorkoutLikesTable(){
+    $sql = "CREATE TABLE IF NOT EXISTS workout_likes(
       id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-      post_id INT UNSIGNED NOT NULL,
+      workout_id INT UNSIGNED NOT NULL,
       user_id INT UNSIGNED NOT NULL
     )";
     $this->executeQuery($sql);

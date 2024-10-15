@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . '/../config/databse.php';
-class Post{
+class Workout{
   private $db;
   public function __construct(){
     $this->db = Database::getInstance()->getConnection();
   }
-  public function getPosts($params){
+  public function getWorkouts($params){
     //base query
     $sql = 
     "SELECT 
@@ -16,11 +16,11 @@ class Post{
       p.created_at,
       p.updated_at,
       u.username AS author,
-      (SELECT COUNT(*) FROM post_likes pl WHERE pl.post_id = p.id) AS like_count,
+      (SELECT COUNT(*) FROM workout_likes wl WHERE wl.workout_id = p.id) AS like_count,
       CASE 
         WHEN ? IS NOT NULL AND EXISTS (
-          SELECT 1 FROM post_likes pl2 
-          WHERE pl2.post_id = p.id AND pl2.user_id = ?
+          SELECT 1 FROM workout_likes wl2 
+          WHERE wl2.workout_id = p.id AND wl2.user_id = ?
         ) THEN 1 
         ELSE 0 
         END AS is_liked_by_user,
@@ -28,7 +28,7 @@ class Post{
         WHEN ? IS NOT NULL AND p.user_id = ? THEN 1 
         ELSE 0 
       END AS is_user_author
-    FROM posts p
+    FROM workouts p
     JOIN users u ON p.user_id = u.id
     ";
 
@@ -80,11 +80,11 @@ class Post{
     }
     $stmt->execute();
     $result = $stmt->get_result();
-    $posts = [];
+    $workouts = [];
     while($row = $result->fetch_assoc()){
-      $posts[] = $row;
+      $workouts[] = $row;
     }
     $stmt->close();
-    return $posts;
+    return $workouts;
   }
 }
