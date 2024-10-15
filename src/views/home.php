@@ -85,7 +85,7 @@
         </div>
         <div class="select-container">
           <label class="form-label" for="difficulty">Difficulty</label>
-          <select class="form-input form-input--select" id="difficulty">
+          <select class="form-input form-input--select" name="difficulty" id="difficulty">
             <option value="beginner">Beginner</option>
             <option value="intermediate">Intermediate</option>
             <option value="advanced">Advanced</option>
@@ -97,31 +97,31 @@
         </div>
         <div class="textarea-container">
           <label class="form-label" for="day1">Day 1</label>
-          <textarea class="form-input form-input--textarea" id="day1"></textarea>
+          <textarea class="form-input form-input--textarea" id="day1" name="workoutDays[]" required></textarea>
         </div>
         <div class="textarea-container">
           <label class="form-label" for="day2">Day 2</label>
-          <textarea class="form-input form-input--textarea" id="day2"></textarea>
+          <textarea class="form-input form-input--textarea" id="day2" name="workoutDays[]"></textarea>
         </div>
         <div class="textarea-container">
           <label class="form-label" for="day3">Day 3</label>
-          <textarea class="form-input form-input--textarea" id="day3"></textarea>
+          <textarea class="form-input form-input--textarea" id="day3" name="workoutDays[]"></textarea>
         </div>
         <div class="textarea-container">
           <label class="form-label" for="day4">Day 4</label>
-          <textarea class="form-input form-input--textarea" id="day4"></textarea>
+          <textarea class="form-input form-input--textarea" id="day4" name="workoutDays[]"></textarea>
         </div>
         <div class="textarea-container">
           <label class="form-label" for="day5">Day 5</label>
-          <textarea class="form-input form-input--textarea" id="day5"></textarea>
+          <textarea class="form-input form-input--textarea" id="day5" name="workoutDays[]"></textarea>
         </div>
         <div class="textarea-container">
           <label class="form-label" for="day6">Day 6</label>
-          <textarea class="form-input form-input--textarea" id="day6"></textarea>
+          <textarea class="form-input form-input--textarea" id="day6" name="workoutDays[]"></textarea>
         </div>
         <div class="textarea-container">
           <label class="form-label" for="day7">Day 7</label>
-          <textarea class="form-input form-input--textarea" id="day7"></textarea>
+          <textarea class="form-input form-input--textarea" id="day7" name="workoutDays[]"></textarea>
         </div>
         
         <button class="form-button" type="submit">Add workout</button>
