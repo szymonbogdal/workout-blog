@@ -8,6 +8,7 @@ class Router{
     "/api/login" => ["controller" => "AuthController", "method" => "login", 'type'=>'api'], 
     "/api/logout" => ["controller" => "AuthController", "method" => "logout", 'type'=>'api'], 
     "/api/workouts" => ["controller" => "WorkoutController", "method" => "workouts", 'type'=>'api'], 
+    "/api/workouts/new" => ["controller" => "WorkoutController", "method" => "newWorkout", 'type'=>'api'], 
 
     "/" => ["controller" => "PageController", "method" => "home", 'type'=>'page'],
     "/login" => ["controller" => "PageController", "method" => "login", 'type'=>'page'],
