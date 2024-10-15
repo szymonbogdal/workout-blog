@@ -87,4 +87,42 @@ class Workout{
     $stmt->close();
     return $workouts;
   }
+
+  public function newWorkout($user_id, $title, $difficulty, $days){
+    $this->db->begin_transaction();
+    try {
+      $workoutSql = "INSERT INTO workouts (user_id, title, difficulty) VALUES (?, ?, ?)";
+      $workoutStmt = $this->db->prepare($workoutSql);
+      $workoutStmt->bind_param("iss", $user_id, $title, $difficulty);
+      $workoutStmt->execute();
+
+      $workout_id = $this->db->insert_id;
+
+      $daySql = "INSERT INTO workout_days (workout_id, day_order, body) VALUES ";
+      $dayValues = [];
+      $dayParams = [];
+      $types = "";
+
+      foreach($days as $index => $day){
+        if(!empty($day)){
+          $dayValues[] = "(?, ?, ?)";
+          $dayParams[] = $workout_id;
+          $dayParams[] = $index + 1;
+          $dayParams[] = $day;
+          $types .= "iis";
+        }
+      }
+
+      $daySql .= implode(", ", $dayValues);
+      $dayStmt = $this->db->prepare($daySql);
+      $dayStmt->bind_param($types, ...$dayParams);
+      $dayStmt->execute();
+
+      $this->db->commit();
+      return ["status"=>"success", "message"=>"Workout has been succesfully created." ];
+    } catch (mysqli_sql_exception $e) {
+      $this->db->rollback();
+      return ["status"=>"failed", "message"=>$e->getMessage()];
+    }
+  }
 }
