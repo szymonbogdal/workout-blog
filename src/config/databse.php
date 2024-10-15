@@ -17,6 +17,7 @@ class Database{
 
     $this->createUsersTable();
     $this->createWorkoutsTable();
+    $this->createWorkoutDaysTable();
     $this->createWorkoutLikesTable();
   }
 
@@ -39,10 +40,19 @@ class Database{
       id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       user_id INT UNSIGNED NOT NULL,
       title VARCHAR(255) NOT NULL,
-      body TEXT NOT NULL,
-      week_days INT UNSIGNED NOT NULL,
+      difficulty VARCHAR(255) NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )";
+    $this->executeQuery($sql);
+  }
+
+  private function createWorkoutDaysTable(){
+    $sql = "CREATE TABLE IF NOT EXISTS workout_days(
+      id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+      workout_id INT UNSIGNED NOT NULL,
+      day_order INT UNSIGNED,
+      body TEXT NOT NULL
     )";
     $this->executeQuery($sql);
   }
