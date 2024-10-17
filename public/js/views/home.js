@@ -1,8 +1,14 @@
 import apiCall from "../apiCall.js";
 import generateWorkout from "../generateWorkout.js";
+import debounce from "../debounce.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const workoutContainer = document.getElementById('workoutContainer');
+  
+  const textInputFilters = document.querySelectorAll(".input");
+  const btnFilters = document.querySelectorAll(".btn-difficulty")
+  const sortFilter = document.getElementById('sortFilter');
+  
   const logoutBtn = document.getElementById('logoutButton');
   
   const openModal = document.getElementById('openModal');
@@ -12,18 +18,61 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("addWorkoutForm");
   const responseMsg = document.getElementById("responseMessage");
 
-
-
-  const getWokrouts = async () => {
+  const getWokrouts = async (params = {}) => {
     const url = "http://localhost/workout_blog/api/workouts";
-    const result = await apiCall(url, "GET");
+    const result = await apiCall(url, "GET", params);
+    workoutContainer.innerHTML = '';
     result.forEach(workout => {
       const workoutHtml = generateWorkout(workout);
       workoutContainer.insertAdjacentHTML('beforeend', workoutHtml);
     });
   }
-
   getWokrouts();
+
+  let filters = {};
+  const filterWorkouts = (updates) => {
+    for(const [key, val] of Object.entries(updates)){
+      if(val === ""){
+        delete filters[key];
+      }else{
+        filters = { ...filters, [key]: val };
+      }
+    }
+    getWokrouts(filters);
+  }
+  const debouncedHandler = debounce((e) => {
+    filterWorkouts({[e.target.name]: e.target.value})
+  }, 300);
+
+  textInputFilters.forEach((input)=>{
+    input.addEventListener('input', debouncedHandler);
+  })
+
+  sortFilter.addEventListener('change', (e)=>{
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    filterWorkouts({
+      sort: selectedOption.value,
+      order: selectedOption.dataset.order
+    })
+  })
+
+  let activeButton = null;
+  btnFilters.forEach((btn)=>{
+    btn.addEventListener("click", (e) => {
+      if(activeButton === e.target){
+        activeButton.classList.remove("btn-difficulty--active");
+        activeButton = null;
+        filterWorkouts({difficulty: ""})
+      }else{
+        if(activeButton){
+          activeButton.classList.remove("btn-difficulty--active");
+        }
+        e.target.classList.add("btn-difficulty--active");
+        activeButton = e.target;
+        filterWorkouts({difficulty: e.target.value})
+      }
+    })
+  })
 
   logoutBtn.addEventListener('click', async() => {
     const result = await apiCall("http://localhost/workout_blog/api/logout", "GET");
