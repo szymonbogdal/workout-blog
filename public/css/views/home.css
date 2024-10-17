@@ -92,7 +92,7 @@
 }
 
 
-.body{
+.workout-container{
   width: 100%;
   
 }
@@ -124,6 +124,9 @@
   height: 2rem;
   font-size: 1.25rem;
   color: #f8f9fa;
+}
+.header__likes-button[data-liked="true"]{
+  background-color: #c1121f;
 }
 .header__likes-count{
   text-align: center;
