@@ -1,22 +1,22 @@
 <div class="container">
   <div class="sidebar">
     <h2 class="sidebar__title">Workout Planner</h2>
-    <input class="input input--main" placeholder="Search workouts...">
+    <input class="input input--main" placeholder="Search workouts..." id="titleFilter" name="title">
     <section class="filters">
       <h3 class="filters__header">Filters</h3>
       <h4 class="filters__subheader">Difficulty</h4>
-      <div class="btn-group">
-        <button class="btn-difficulty">Beginner</button>
-        <button class="btn-difficulty">Intermediate</button>
-        <button class="btn-difficulty">Advanced</button>
+      <div class="btn-group" id="btnGroup">
+        <button class="btn-difficulty" value="beginner">Beginner</button>
+        <button class="btn-difficulty" value="intermediate">Intermediate</button>
+        <button class="btn-difficulty" value="advanced">Advanced</button>
       </div>
       <h4 class="filters__subheader">Days a week</h4>
-      <input class="input input--secondary" placeholder="Search days a week...">
-      <h4 class="filters__subheader">Sort by</h4>
-      <select class="sort-select">
-        <option value="popularity">Popularity</option>
-        <option value="duration">Duration</option>
-        <option value="date">Date</option>
+      <input class="input input--secondary" placeholder="Search days a week..." id="weekDaysFilter" name="week_days">
+      <h4 class="filters__subheader">Sort</h4>
+      <select class="sort-select" id="sortFilter">
+        <option value="like_count" data-order="DESC">Most popular</option>
+        <option value="week_days" data-order="DESC">Duration</option>
+        <option value="created_at" data-order="DESC">Date</option>
       </select>
     </section>
     <section class="user-data">
