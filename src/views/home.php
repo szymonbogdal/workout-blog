@@ -15,8 +15,10 @@
       <h4 class="filters__subheader">Sort</h4>
       <select class="sort-select" id="sortFilter">
         <option value="like_count" data-order="DESC">Most popular</option>
-        <option value="week_days" data-order="DESC">Duration</option>
-        <option value="created_at" data-order="DESC">Date</option>
+        <option value="created_at" data-order="ASC">Newest</option>
+        <option value="created_at" data-order="DESC">Oldest</option>
+        <option value="week_days" data-order="DESC">Longest</option>
+        <option value="week_days" data-order="ASC">Shortest</option>
       </select>
     </section>
     <section class="user-data">
