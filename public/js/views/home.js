@@ -1,6 +1,8 @@
 import apiCall from "../apiCall.js";
+import generateWorkout from "../generateWorkout.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const workoutContainer = document.getElementById('workoutContainer');
   const logoutBtn = document.getElementById('logoutButton');
   
   const openModal = document.getElementById('openModal');
@@ -9,6 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalContent = document.getElementById('modalContent');
   const form = document.getElementById("addWorkoutForm");
   const responseMsg = document.getElementById("responseMessage");
+
+
+
+  const getWokrouts = async () => {
+    const url = "http://localhost/workout_blog/api/workouts";
+    const result = await apiCall(url, "GET");
+    result.forEach(workout => {
+      const workoutHtml = generateWorkout(workout);
+      workoutContainer.insertAdjacentHTML('beforeend', workoutHtml);
+    });
+  }
+
+  getWokrouts();
 
   logoutBtn.addEventListener('click', async() => {
     const result = await apiCall("http://localhost/workout_blog/api/logout", "GET");
@@ -44,3 +59,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 });
+
