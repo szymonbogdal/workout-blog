@@ -49,6 +49,9 @@
   font-size: 1rem;
   cursor: pointer;
 }
+.btn-difficulty--active{
+  background-color: #777777;
+}
 .btn-difficulty:hover{
   background-color: #777777;
 }
