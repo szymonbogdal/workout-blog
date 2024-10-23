@@ -93,10 +93,14 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   logoutBtn.addEventListener('click', async() => {
+    workoutContainer.style.display = "none";
+    loaderContainer.style.display = "block";
     const result = await apiCall("http://localhost/workout_blog/api/logout", "GET");
     if(result.status == 'success'){
       window.location.href = '/workout_blog/login';
     }
+    workoutContainer.style.display = "block";
+    loaderContainer.style.display = "none";
   })
 
   openModal.addEventListener('click', () => {
