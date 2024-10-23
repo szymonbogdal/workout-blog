@@ -4,7 +4,9 @@ import debounce from "../debounce.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const workoutContainer = document.getElementById('workoutContainer');
-  
+  const responseError = `<p class="workout__response">There was some error. Please try again later.</p>`
+  const responseEmpty = `<p class="workout__response">No workouts found.</p>`
+
   const textInputFilters = document.querySelectorAll(".input");
   const btnFilters = document.querySelectorAll(".btn-difficulty")
   const sortFilter = document.getElementById('sortFilter');
@@ -21,7 +23,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const getWokrouts = async (params = {}) => {
     const url = "http://localhost/workout_blog/api/workouts";
     const result = await apiCall(url, "GET", params);
-    workoutContainer.innerHTML = '';
+    workoutContainer.innerHTML = null;
+
+    if(result?.status == 'failed'){
+      workoutContainer.insertAdjacentHTML('beforeend', responseError);
+      return;
+    }
+
+    if(result.length == 0){
+      workoutContainer.insertAdjacentHTML('beforeend', responseEmpty);
+      return;
+    }
+
     result.forEach(workout => {
       const workoutHtml = generateWorkout(workout);
       workoutContainer.insertAdjacentHTML('beforeend', workoutHtml);
