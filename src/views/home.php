@@ -29,6 +29,9 @@
     </section>
   </div>
 
+  <div class="loader__container" id="loaderContainer">
+    <div class="loader"></div>
+  </div>
   <div class="workout-container" id="workoutContainer">
     
   </div>
