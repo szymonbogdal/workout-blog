@@ -8,9 +8,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const submitBtn = document.getElementById("submitButton");
   const responseMsg = document.getElementById("responseMessage");
 
+  const loaderContainer = document.getElementById('loaderContainer');
+
   let isLogin = true;
 
   form.addEventListener('submit', async (e) => {
+    loaderContainer.style.display = "flex";
     e.preventDefault();
     const formData = new FormData(form);
     const url = `http://localhost/workout_blog/api/${isLogin ? "login" : "register"}`;
@@ -20,6 +23,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }else{
       responseMsg.innerHTML = result.message ? result.message : "Something went wrong. Try again later";
     }
+    loaderContainer.style.display = "none";
   });
 
   swapAction.addEventListener('click', () => {

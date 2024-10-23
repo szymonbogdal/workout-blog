@@ -1,3 +1,6 @@
+<div class="loader__container" id="loaderContainer">
+    <div class="loader"></div>
+</div>
 <div class="auth__container">
   <h2 class="auth__title" id="formTitle">Log in</h2>
   <form class="auth__form" id="authForm">
