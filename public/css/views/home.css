@@ -127,6 +127,7 @@
   height: 2rem;
   font-size: 1.25rem;
   color: #f8f9fa;
+  cursor: pointer;
 }
 .header__likes-button[data-liked="true"]{
   background-color: #c1121f;
