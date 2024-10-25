@@ -22,7 +22,13 @@ return `
           </div>
         </div>
         <div class="header__likes">
-          <button class="header__likes-button" ${workout.is_liked_by_user ? 'data-liked="true"' : ''}>&#x2764;</button>
+          <button 
+            class="header__likes-button" 
+            data-liked=${workout.is_liked_by_user ? 'true' : 'false'}
+            data-workout=${workout.id}
+          >
+            &#x2764;
+          </button>
           <p class="header__likes-count">${workout.like_count}</p>
         </div>  
       </div>
