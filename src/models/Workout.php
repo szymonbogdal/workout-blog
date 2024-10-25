@@ -115,7 +115,7 @@ class Workout{
       }
       return $workouts;
     }catch(mysqli_sql_exception $e){
-      return ["status"=>"failed", "message"=>$e->getMessage()];
+      return ["status"=>"error", "message"=>$e->getMessage()];
     }
   }
 
@@ -153,7 +153,7 @@ class Workout{
       return ["status"=>"success", "message"=>"Workout has been succesfully created." ];
     } catch (mysqli_sql_exception $e) {
       $this->db->rollback();
-      return ["status"=>"failed", "message"=>$e->getMessage()];
+      return ["status"=>"error", "message"=>$e->getMessage()];
     }
   }
 }

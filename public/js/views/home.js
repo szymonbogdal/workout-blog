@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loaderContainer.style.display = "none";
     workoutContainer.style.display = "block";
 
-    if(result?.status == 'failed'){
+    if(result?.status == 'error'){
       workoutContainer.insertAdjacentHTML('beforeend', responseError);
       return;
     }

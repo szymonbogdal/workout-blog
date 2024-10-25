@@ -14,7 +14,7 @@ class User{
       $stmt->execute();
       return ["status"=>"success", "message"=>"User has been succesfully created." ];
     }catch(mysqli_sql_exception $e){
-      return ["status"=>"failed", "message"=>$e->getMessage()];
+      return ["status"=>"error", "message"=>$e->getMessage()];
     }
   }
 
@@ -27,7 +27,7 @@ class User{
       $result = $stmt->get_result();
       return $result->fetch_assoc();
     }catch(mysqli_sql_exception $e){
-      return ["status"=>"failed", "message"=>$e->getMessage()];
+      return ["status"=>"error", "message"=>$e->getMessage()];
     }
   }
 }
