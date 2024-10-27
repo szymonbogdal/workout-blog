@@ -9,7 +9,7 @@ class Workout{
     try{
       //base query
       $workoutSql = 
-      "SELECT 
+      "SELECT SQL_CALC_FOUND_ROWS 
         w.id,
         w.title,
         w.difficulty,
@@ -69,7 +69,13 @@ class Workout{
       }else{
         $workoutSql .= " ORDER BY like_count DESC";
       }
-      
+
+      //Add pagination
+      $workoutSql .= " LIMIT ? OFFSET ?";
+      $workoutValues[] = $params['per_page'];
+      $workoutValues[] = $params['offset'];
+      $workoutTypes .= "ii";
+
       //Prepare and execute query
       $workoutStmt = $this->db->prepare($workoutSql);
       if(!empty($workoutValues)){
@@ -77,6 +83,11 @@ class Workout{
       }
       $workoutStmt->execute();
       $workoutResult = $workoutStmt->get_result();
+      
+      //total row count
+      $totalCount = $this->db->query('SELECT FOUND_ROWS()')->fetch_row()[0];
+
+      //Assign result to associative array
       $workouts = [];
       $workoutIds = [];
       while($row =  $workoutResult->fetch_assoc()){
@@ -113,7 +124,10 @@ class Workout{
           ];
         }
       }
-      return $workouts;
+      return [
+        "data"=>$workouts,
+        "total_pages"=>ceil($totalCount / $params['per_page']),
+      ];
     }catch(mysqli_sql_exception $e){
       return ["status"=>"error", "message"=>$e->getMessage()];
     }
