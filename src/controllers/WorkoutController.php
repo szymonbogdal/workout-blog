@@ -12,6 +12,11 @@ class WorkoutController{
     if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
       $params['user_id'] = $_SESSION['user_id'];
     }
+    if(!isset($params['page']) || !is_numeric($params['page'])){
+      $params['page'] = 1;
+    }
+    $params['per_page'] = 3;
+    $params['offset'] = ($params['page'] - 1 ) * $params['per_page'];
     return $this->workout->getWorkouts($params);
   }
 
