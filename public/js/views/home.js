@@ -1,12 +1,14 @@
 import apiCall from "../apiCall.js";
 import generateWorkout from "../generateWorkout.js";
 import debounce from "../debounce.js";
+import getPageNumbers from "../getPageNumbers.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const workoutContainer = document.getElementById('workoutContainer');
-  const loaderContainer = document.getElementById('loaderContainer');
+  const loader = document.getElementById('loader');
   const responseError = `<p class="workout__response">There was some error. Please try again later.</p>`
   const responseEmpty = `<p class="workout__response">No workouts found.</p>`
+  const paginationContainer = document.getElementById("paginationContainer")
 
   const textInputFilters = document.querySelectorAll(".input");
   const btnFilters = document.querySelectorAll(".btn-difficulty")
@@ -21,29 +23,84 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("addWorkoutForm");
   const responseMsg = document.getElementById("responseMessage");
 
-  const getWokrouts = async (params = {}) => {
-    workoutContainer.innerHTML = null;
-    workoutContainer.style.display = "none";
-    loaderContainer.style.display = "block";
-    const url = "http://localhost/workout_blog/api/workouts";
-    const result = await apiCall(url, "GET", params);
-    loaderContainer.style.display = "none";
-    workoutContainer.style.display = "block";
+  let state = {page: 1};
+  
+  const renderPagination = (totalPages) => {
+    const pageNumbers = getPageNumbers(totalPages, state.page);
 
+    const oldButtons = paginationContainer.querySelectorAll('.page-button');
+    oldButtons.forEach(button => {
+      button.replaceWith(button.cloneNode(true));
+    });
+    
+    let html = `
+      <button 
+        class="page-button page-button--arrow" 
+       data-page="${state.page - 1}"
+        ${state.page === 1 ? 'disabled' : ''}
+      >
+        &#11164;
+      </button>
+    `;
+
+    pageNumbers.forEach(pageNum => {
+        html += `
+        <button 
+          class="page-button ${pageNum === state.page ? 'page-button--active' : ''}"
+          data-page="${pageNum}"
+        >
+          ${pageNum}
+        </button>
+      `;
+    });
+
+    html += `
+      <button 
+        class="page-button page-button--arrow" 
+        data-page="${state.page + 1}"
+        ${state.page === totalPages ? 'disabled' : ''}
+      >
+        &#11166;
+      </button>
+    `;
+
+    paginationContainer.innerHTML = html;
+
+    const newButtons = paginationContainer.querySelectorAll('.page-button');
+    newButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const page = parseInt(button.dataset.page);
+        state.page = page;
+        getWokrouts();
+      });
+    });
+  }
+
+  const getWokrouts = async () => {
+    workoutContainer.innerHTML = null;
+    paginationContainer.style.display = "none";
+    loader.style.display = "block";
+    const url = "http://localhost/workout_blog/api/workouts";
+    const result = await apiCall(url, "GET", state);
+    loader.style.display = "none";
+    paginationContainer.style.display = "flex";
+    
     if(result?.status == 'error'){
-      workoutContainer.insertAdjacentHTML('beforeend', responseError);
+      workoutContainer.insertAdjacentHTML('beforeend', responseError);  
       return;
     }
 
-    if(result.length == 0){
+    if(result.data.length == 0){
       workoutContainer.insertAdjacentHTML('beforeend', responseEmpty);
       return;
     }
 
-    result.forEach(workout => {
+    result.data.forEach(workout => {
       const workoutHtml = generateWorkout(workout);
       workoutContainer.insertAdjacentHTML('beforeend', workoutHtml);
     });
+    renderPagination(result.total_pages);
+
     const likeBtns = document.querySelectorAll(".header__likes-button");
     likeBtns.forEach(btn => {
       btn.addEventListener('click', async (e) => {
@@ -68,16 +125,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   getWokrouts();
 
-  let filters = {};
   const filterWorkouts = (updates) => {
     for(const [key, val] of Object.entries(updates)){
       if(val === ""){
-        delete filters[key];
+        delete state[key];
       }else{
-        filters = { ...filters, [key]: val };
+        state = { ...state, [key]: val };
       }
     }
-    getWokrouts(filters);
+    getWokrouts();
   }
   const debouncedHandler = debounce((e) => {
     filterWorkouts({[e.target.name]: e.target.value})
