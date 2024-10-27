@@ -29,12 +29,17 @@
     </section>
   </div>
 
-  <div class="loader__container--workout" id="loaderContainer">
-    <div class="loader--workout"></div>
-  </div>
-  <div class="workout-container" id="workoutContainer">
+  
+  <div class="content">
+    <div class="loader--workout" id="loader"></div>  
+    <div class="workout-container" id="workoutContainer">
     
+    </div>
+    <div class="pagination-container" id="paginationContainer">
+
+    </div>
   </div>
+  
 
   <div class="modal" id="modal">
     <div class="modal-content" id="modalContent">
