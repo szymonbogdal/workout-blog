@@ -92,6 +92,10 @@
 .profile-link{
   margin: 0.25rem;
   font-size: 1.15rem;
+  cursor: pointer;
+}
+.profile-link:hover{
+  color: #999999;
 }
 
 
