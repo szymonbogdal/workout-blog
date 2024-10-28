@@ -45,6 +45,7 @@
 .auth__footer{
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 .footer__action{
@@ -54,4 +55,10 @@
 .auth__resposne{
   text-align: center;
   margin-bottom: 0.5rem;
+}
+.footer__return{
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: #555555;
 }
