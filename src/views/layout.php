@@ -13,6 +13,9 @@
       echo "<script type='module' src='/workout_blog/public/js/views/$js'></script>";
     }
   ?>
+  <script>
+    window.isLogged = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false' ?>
+  </script>
 </head>
 <body>
   <?php require $content; ?>
