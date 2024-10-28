@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortFilter = document.getElementById('sortFilter');
   
   const logoutBtn = document.getElementById('logoutButton');
+  const loginBtn = document.getElementById('loginButton');
   
   const openModal = document.getElementById('openModal');
   const closeModal = document.getElementById('closeModal');
@@ -36,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let html = `
       <button 
         class="page-button page-button--arrow" 
-       data-page="${state.page - 1}"
+        data-page="${state.page - 1}"
         ${state.page === 1 ? 'disabled' : ''}
       >
         &#11164;
@@ -169,18 +170,22 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  logoutBtn.addEventListener('click', async() => {
-    workoutContainer.style.display = "none";
-    loaderContainer.style.display = "block";
+    logoutBtn && logoutBtn.addEventListener('click', async() => {
+    paginationContainer.style.display = "none";
+    loader.style.display = "block";
     const result = await apiCall("http://localhost/workout_blog/api/logout", "GET");
     if(result.status == 'success'){
-      window.location.href = '/workout_blog/login';
+      window.location.reload();
     }
-    workoutContainer.style.display = "block";
-    loaderContainer.style.display = "none";
+    loader.style.display = "none";
+    paginationContainer.style.display = "flex";
   })
 
-  openModal.addEventListener('click', () => {
+  loginBtn && loginBtn.addEventListener('click', () => {
+    window.location.href = '/workout_blog/login';
+  })
+
+  openModal && openModal.addEventListener('click', () => {
     modal.style.display = "block";
   })
   closeModal.addEventListener('click', () => {
