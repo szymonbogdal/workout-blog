@@ -26,6 +26,7 @@ return `
             class="header__likes-button" 
             data-liked=${workout.is_liked_by_user ? 'true' : 'false'}
             data-workout=${workout.id}
+            ${window.isLogged ? '' : 'disabled'}
           >
             &#x2764;
           </button>
