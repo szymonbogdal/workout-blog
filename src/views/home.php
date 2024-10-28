@@ -23,9 +23,15 @@
     </section>
     <section class="user-data">
       <hr class="separator">
-      <p class="profile-link" id="openModal">Create workout</p>
-      <p class="profile-link">Profile</p>
-      <p class="profile-link" id="logoutButton">Logout</p>   
+      <?php
+        if(isset($_SESSION['user_id'])){
+          echo "<p class='profile-link' id='openModal'>Create workout</p>";
+          echo "<p class='profile-link'>Profile</p>";
+          echo "<p class='profile-link' id='logoutButton'>Logout</p>";
+        }else{
+          echo "<p class='profile-link' id='loginButton'>Login</p>";
+        }
+      ?>
     </section>
   </div>
 
