@@ -1,0 +1,92 @@
+.container{
+  width: 100%;
+}
+.user-info{
+  width: 50%;
+  margin: 1rem auto;
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.user-name{
+  font-size: 2.5rem;
+}
+.user-stats{
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+}
+.user-stats__button{
+  margin-top: 1rem;
+  padding: 0.5rem 2rem;
+  background-color: #333;
+  color: #f8f9fa;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border-radius: 12px;
+}
+.user-stats__return{
+  margin-top: 1rem;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: #555555;
+  font-weight: bold;
+}
+.content{
+  width: 90%;
+  margin: 0 auto;
+}
+.filters{
+  width: 75%;
+  margin: 1rem auto;
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.button-group{
+  margin-bottom: 1.5rem;
+}
+.action-button{
+  border: none;
+  font-size: 1.25rem;
+  padding: 0.5rem 3rem;
+  margin-right: 0.15rem;
+  border-radius: 12px;
+  background-color: #cbcdcf;
+  cursor: pointer;
+}
+.action-button--active{
+  color: #f8f9fa;
+  background-color: #333;
+}
+.filters__group{
+  display: inline-block;
+  width: 40%;
+  margin-right: 3rem;
+}
+.filters__label{
+  display: inline-block;
+  font-size: 1.15rem;
+  text-align: left;
+}
+.filters__input{
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  border: none;
+  border: solid 0.05rem #cbcdcf;
+  background: none;
+}
+.workout:first-child{
+  margin-top: 0;
+}
