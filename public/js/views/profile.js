@@ -26,14 +26,14 @@ document.addEventListener(("DOMContentLoaded"), () => {
         actionBtns[activeBtnIndex].classList.remove("action-button--active");
         btn.classList.add("action-button--active");
         activeBtnIndex = index;
-        if(index === 1 && state.option === "author"){
-          state.option = "liked";
+        if(index === 1 && currentAction === "author"){
+          currentAction = "liked";
           getWorkouts();
           return;
         }
 
-        if(index === 0 && state.option === "liked"){
-          state.option = "author";
+        if(index === 0 && currentAction === "liked"){
+          currentAction = "author";
           getWorkouts();
           return;
         }
