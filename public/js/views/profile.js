@@ -1,6 +1,7 @@
 import apiCall from "../apiCall.js";
 import generateWorkout from "../generateWorkout.js";
 import generatePagination from "../generatePagination.js";
+import debounce from "../debounce.js";
 
 document.addEventListener(("DOMContentLoaded"), () => {
   const workoutContainer = document.getElementById('workoutContainer');
@@ -9,10 +10,14 @@ document.addEventListener(("DOMContentLoaded"), () => {
 
   const actionBtns = document.querySelectorAll('.action-button');
 
+  const tileFilter = document.getElementById("titleFilter");
+  const sortFilter = document.getElementById("sortFilter");
+
   const responseError = `<p class="workout__response">There was some error. Please try again later.</p>`;
   const responseEmpty = `<p class="workout__response">No workouts found.</p>`;
   
-  let state = {page: 1, option: "author"};
+  let state = {page: 1};
+  let currentAction = "author";
   
   let activeBtnIndex = 0;
   actionBtns.forEach((btn, index) => {
@@ -59,7 +64,7 @@ document.addEventListener(("DOMContentLoaded"), () => {
     loaderContainer.style.display = "flex";
 
     const url = "http://localhost/workout_blog/api/workouts";
-    const result = await apiCall(url, "GET", {[state.option]: window.userId});
+    const result = await apiCall(url, "GET", {...state, [currentAction]: window.userId});
 
     loaderContainer.style.display = "none";
     if(result?.status == 'error'){
@@ -80,4 +85,28 @@ document.addEventListener(("DOMContentLoaded"), () => {
   }
   
   getWorkouts();
+
+  const filterWorkouts = (updates) => {
+    for(const [key, val] of Object.entries(updates)){
+      if(val === ""){
+        delete state[key];
+      }else{
+        state = { ...state, [key]: val };
+      }
+    }
+    getWorkouts();
+  }
+  const debouncedHandler = debounce((e) => {
+    filterWorkouts({[e.target.name]: e.target.value})
+  }, 300);
+
+  tileFilter.addEventListener('input', debouncedHandler);
+
+  sortFilter.addEventListener('change', (e)=>{
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    filterWorkouts({
+      sort: selectedOption.value,
+      order: selectedOption.dataset.order
+    })
+  })
 })
