@@ -26,7 +26,7 @@
       <?php
         if(isset($_SESSION['user_id'])){
           echo "<p class='profile-link' id='openModal'>Create workout</p>";
-          echo "<p class='profile-link'>Profile</p>";
+          echo "<a href='profile' class='profile-link'>Profile</a>";
           echo "<p class='profile-link' id='logoutButton'>Logout</p>";
         }else{
           echo "<p class='profile-link' id='loginButton'>Login</p>";

@@ -93,6 +93,8 @@
   margin: 0.25rem;
   font-size: 1.15rem;
   cursor: pointer;
+  text-decoration: none;
+  color: #f8f9fa;
 }
 .profile-link:hover{
   color: #999999;
