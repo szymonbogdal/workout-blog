@@ -40,7 +40,7 @@ class Router{
     }catch(Exception $e){
       if(str_contains($action, "/api/")){
         header('Content-Type: application/json');
-        echo json_encode(['error' => $e->getMessage()]);
+        echo json_encode(['status'=>"error", 'message' => $e->getMessage()]);
       }else{
         header('Content-Type: text/html');
         echo "<h1>Error</h1><p>".$e->getMessage()."</p>";
