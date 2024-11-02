@@ -14,7 +14,7 @@
     }
   ?>
   <script>
-    window.isLogged = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false' ?>
+    window.userId = <?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0 ?>
   </script>
 </head>
 <body>
