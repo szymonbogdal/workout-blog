@@ -1,7 +1,7 @@
 import apiCall from "../apiCall.js";
 import generateWorkout from "../generateWorkout.js";
 import debounce from "../debounce.js";
-import getPageNumbers from "../getPageNumbers.js";
+import generatePagination from "../generatePagination.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const workoutContainer = document.getElementById('workoutContainer');
@@ -27,45 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let state = {page: 1};
   
   const renderPagination = (totalPages) => {
-    const pageNumbers = getPageNumbers(totalPages, state.page);
-
     const oldButtons = paginationContainer.querySelectorAll('.page-button');
     oldButtons.forEach(button => {
       button.replaceWith(button.cloneNode(true));
     });
-    
-    let html = `
-      <button 
-        class="page-button page-button--arrow" 
-        data-page="${state.page - 1}"
-        ${state.page === 1 ? 'disabled' : ''}
-      >
-        &#11164;
-      </button>
-    `;
-
-    pageNumbers.forEach(pageNum => {
-        html += `
-        <button 
-          class="page-button ${pageNum === state.page ? 'page-button--active' : ''}"
-          data-page="${pageNum}"
-        >
-          ${pageNum}
-        </button>
-      `;
-    });
-
-    html += `
-      <button 
-        class="page-button page-button--arrow" 
-        data-page="${state.page + 1}"
-        ${state.page === totalPages ? 'disabled' : ''}
-      >
-        &#11166;
-      </button>
-    `;
-
-    paginationContainer.innerHTML = html;
+    paginationContainer.innerHTML = generatePagination(totalPages, state.page);
 
     const newButtons = paginationContainer.querySelectorAll('.page-button');
     newButtons.forEach(button => {
