@@ -105,70 +105,6 @@
   display: flex;
   flex-direction: column;
 }
-.workout-container{
-  width: 100%;
-}
-.workout{
-  border-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  width: 75%;
-  margin: 0 auto;
-  background-color: #f8f9fa;
-  padding: 1.5rem 2rem;
-  margin-top: 3rem;
-}
-.workout__header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.header__tilte{
-  font-size: 2.5rem;
-}
-.header__description{
-  display: flex;
-}
-.header__likes-button{
-  border: none;
-  border-radius: 50%;
-  background-color: #333333;
-  width: 2rem;
-  height: 2rem;
-  font-size: 1.25rem;
-  color: #f8f9fa;
-  cursor: pointer;
-}
-.header__likes-button[data-liked="true"]{
-  background-color: #c1121f;
-}
-.header__likes-count{
-  text-align: center;
-  font-weight: lighter;
-}
-.header__description-item{
-  color: #777777;
-  margin-left: 0.5rem;
-}
-.workout__container{
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
-  width: 100%;
-}
-.workout__day{
-  background-color: #e9ecef;
-  border-radius: 12px;
-  padding: 0.25rem 0.5rem;
-}
-.workout__day-exercise{
-  margin-left: 1.5rem;
-}
-.workout__response{
-  text-align: center;
-  margin-top: 2rem;
-  font-size: 1.5rem;
-}
 
 .loader--workout{
   width: 2.5rem;
@@ -179,37 +115,6 @@
   animation: rotation 1s linear infinite;
   margin: auto;
   align-self: center;
-}
-
-.pagination-container{
-  margin-top: auto;
-  align-self: center;
-  display: flex;
-  padding-top: 2rem;
-  margin-bottom: 2rem;
-}
-.page-button{
-  border: solid 0.1rem #777777;
-  border-radius: 12px;
-  width: 2.5rem;
-  height: 2.5rem;
-  text-align: center;
-  background: none;
-  font-size: 1.5rem;
-  color: #333333;
-  cursor: pointer;
-  margin-right: 1rem;
-} 
-.page-button:nth-last-child(2){
-  margin-right: 0;
-} 
-.page-button--active{
-  color: #f8f9fa;
-  background-color: #333;
-}
-.page-button--arrow{
-  border: none;
-  margin-right: 0;
 }
 .ellipsis{
   font-size: 1.25rem;
