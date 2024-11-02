@@ -19,12 +19,12 @@
         <button class="action-button">Liked posts</button>
       </div>
       <div class="filters__group">
-        <label for="title" class="filters__label">Search title</label>
-        <input type="text" class="filters__input" id="title">
+        <label for="titleFilter" class="filters__label">Search title</label>
+        <input type="text" name="title" class="filters__input" id="titleFilter">
       </div>
       <div class="filters__group">
-        <label for="sort" class="filters__label">Sort</label>
-        <select class="filters__input" id="sort">
+        <label for="sortFilter" class="filters__label">Sort</label>
+        <select class="filters__input" id="sortFilter">
           <option value="like_count" data-order="DESC">Most popular</option>
           <option value="created_at" data-order="ASC">Newest</option>
           <option value="created_at" data-order="DESC">Oldest</option>
