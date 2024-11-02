@@ -7,11 +7,35 @@ document.addEventListener(("DOMContentLoaded"), () => {
   const paginationContainer = document.getElementById("paginationContainer");
   const loaderContainer = document.getElementById('loaderContainer');
 
+  const actionBtns = document.querySelectorAll('.action-button');
+
   const responseError = `<p class="workout__response">There was some error. Please try again later.</p>`;
   const responseEmpty = `<p class="workout__response">No workouts found.</p>`;
   
-  let state = {page: 1};
+  let state = {page: 1, option: "author"};
   
+  let activeBtnIndex = 0;
+  actionBtns.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      if(activeBtnIndex !== index){
+        actionBtns[activeBtnIndex].classList.remove("action-button--active");
+        btn.classList.add("action-button--active");
+        activeBtnIndex = index;
+        if(index === 1 && state.option === "author"){
+          state.option = "liked";
+          getWorkouts();
+          return;
+        }
+
+        if(index === 0 && state.option === "liked"){
+          state.option = "author";
+          getWorkouts();
+          return;
+        }
+      }
+    })
+  })
+
   const renderPagination = (totalPages) => {
     const oldButtons = paginationContainer.querySelectorAll('.page-button');
     oldButtons.forEach(button => {
@@ -35,8 +59,9 @@ document.addEventListener(("DOMContentLoaded"), () => {
     loaderContainer.style.display = "flex";
 
     const url = "http://localhost/workout_blog/api/workouts";
-    const result = await apiCall(url, "GET");
+    const result = await apiCall(url, "GET", {[state.option]: window.userId});
 
+    loaderContainer.style.display = "none";
     if(result?.status == 'error'){
       workoutContainer.insertAdjacentHTML('beforeend', responseError);  
       return;
@@ -52,7 +77,6 @@ document.addEventListener(("DOMContentLoaded"), () => {
       workoutContainer.insertAdjacentHTML('beforeend', workoutHtml);
     });
     renderPagination(result.total_pages);
-    loaderContainer.style.display = "none";
   }
   
   getWorkouts();
