@@ -13,6 +13,7 @@ class Router{
 
     "/" => ["controller" => "PageController", "method" => "home", 'type'=>'page'],
     "/login" => ["controller" => "PageController", "method" => "login", 'type'=>'page'],
+    "/profile" => ["controller" => "PageController", "method" => "profile", 'type'=>'page'],
   ]; 
 
   public function dispatch($action) {
