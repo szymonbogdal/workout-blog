@@ -42,6 +42,8 @@
 .content{
   width: 90%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 .filters{
   width: 75%;
@@ -87,6 +89,6 @@
   border: solid 0.05rem #cbcdcf;
   background: none;
 }
-.workout:first-child{
-  margin-top: 0;
+.workout{
+  margin-top: 1rem;
 }
