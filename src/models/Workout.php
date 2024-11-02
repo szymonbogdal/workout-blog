@@ -48,6 +48,21 @@ class Workout{
         $workoutTypes .= "s";
       }
 
+      if(isset($params['author'])){
+        $workoutConditions[] = "w.user_id LIKE ?";
+        $workoutValues[] = $params['author'];
+        $workoutTypes .= "i";
+      }
+
+      if(isset($params['liked'])){
+        $workoutConditions[] = "EXISTS (
+          SELECT 1 FROM workout_likes wl 
+          WHERE wl.workout_id = w.id AND wl.user_id = ?
+        )";
+        $workoutValues[] = $params['liked'];
+        $workoutTypes .= "i";
+      }
+
       if(!empty($workoutConditions)){
         $workoutSql .= " WHERE ".implode(" AND ",$workoutConditions);
       }
