@@ -1,3 +1,6 @@
+<div class="loader__container" id="loaderContainer">
+    <div class="loader"></div>
+</div>
 <div class="container">
   <div class="user-info">
     <h2 class="user-name">tymoteusz</h2>
@@ -31,6 +34,9 @@
       </div>
     </div>
     <div class="workout-container" id="workoutContainer">
+
+    </div>
+    <div class="pagination-container" id="paginationContainer">
 
     </div>
   </div>
