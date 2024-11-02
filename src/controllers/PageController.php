@@ -17,4 +17,14 @@ class PageController{
     $content = __DIR__ . "/../views/login.php";
     require __DIR__ . "/../views/layout.php";
   }
+  public function profile(){
+    if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
+      header("Location: /workout_blog");
+    }
+    $title = "Profile";
+    $js = "profile.js";
+    $css = "profile.css";
+    $content = __DIR__ . "/../views/profile.php";
+    require __DIR__ . "/../views/layout.php";
+  }
 }
