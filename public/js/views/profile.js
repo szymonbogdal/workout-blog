@@ -35,12 +35,14 @@ document.addEventListener(("DOMContentLoaded"), () => {
         activeBtnIndex = index;
         if(index === 1 && currentAction === "author"){
           currentAction = "liked";
+          state.page = 1;
           getWorkouts();
           return;
         }
 
         if(index === 0 && currentAction === "liked"){
           currentAction = "author";
+          state.page = 1;
           getWorkouts();
           return;
         }
