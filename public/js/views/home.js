@@ -16,13 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const logoutBtn = document.getElementById('logoutButton');
   const loginBtn = document.getElementById('loginButton');
-  
-  const openModal = document.getElementById('openModal');
-  const closeModal = document.getElementById('closeModal');
-  const modal = document.getElementById('modal');
-  const modalContent = document.getElementById('modalContent');
-  const form = document.getElementById("addWorkoutForm");
-  const responseMsg = document.getElementById("responseMessage");
 
   let state = {page: 1};
   
@@ -151,31 +144,5 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = '/workout_blog/login';
   })
 
-  openModal && openModal.addEventListener('click', () => {
-    modal.style.display = "block";
-  })
-  closeModal.addEventListener('click', () => {
-    modal.style.display = "none";
-  })
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
-  });
-  modalContent.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const url = "http://localhost/workout_blog/api/workouts/new";
-    const result = await apiCall(url, "POST", formData);
-    if(result?.status == 'success'){
-      modal.style.display = "none";
-    }else{
-      responseMsg.innerHTML = result.message ? result.message : "Something went wrong. Try again later";
-    }
-  })
 });
 

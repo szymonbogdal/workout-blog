@@ -16,6 +16,13 @@ document.addEventListener(("DOMContentLoaded"), () => {
   const responseError = `<p class="workout__response">There was some error. Please try again later.</p>`;
   const responseEmpty = `<p class="workout__response">No workouts found.</p>`;
   
+  const openModal = document.getElementById('openModal');
+  const closeModal = document.getElementById('closeModal');
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modalContent');
+  const form = document.getElementById("addWorkoutForm");
+  const responseMsg = document.getElementById("responseMessage");
+
   let state = {page: 1};
   let currentAction = "author";
   
@@ -108,5 +115,32 @@ document.addEventListener(("DOMContentLoaded"), () => {
       sort: selectedOption.value,
       order: selectedOption.dataset.order
     })
+  })
+
+  openModal && openModal.addEventListener('click', () => {
+    modal.style.display = "block";
+  })
+  closeModal.addEventListener('click', () => {
+    modal.style.display = "none";
+  })
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+  modalContent.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const url = "http://localhost/workout_blog/api/workouts/new";
+    const result = await apiCall(url, "POST", formData);
+    if(result?.status == 'success'){
+      modal.style.display = "none";
+    }else{
+      responseMsg.innerHTML = result.message ? result.message : "Something went wrong. Try again later";
+    }
   })
 })
