@@ -26,8 +26,8 @@
         <label for="sortFilter" class="filters__label">Sort</label>
         <select class="filters__input" id="sortFilter">
           <option value="like_count" data-order="DESC">Most popular</option>
-          <option value="created_at" data-order="ASC">Newest</option>
-          <option value="created_at" data-order="DESC">Oldest</option>
+          <option value="created_at" data-order="DESC">Newest</option>
+          <option value="created_at" data-order="ASC">Oldest</option>
           <option value="week_days" data-order="DESC">Longest</option>
           <option value="week_days" data-order="ASC">Shortest</option>
         </select>
