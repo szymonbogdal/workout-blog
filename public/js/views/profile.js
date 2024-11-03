@@ -139,6 +139,7 @@ document.addEventListener(("DOMContentLoaded"), () => {
     const result = await apiCall(url, "POST", formData);
     if(result?.status == 'success'){
       modal.style.display = "none";
+      getWorkouts();
     }else{
       responseMsg.innerHTML = result.message ? result.message : "Something went wrong. Try again later";
     }
