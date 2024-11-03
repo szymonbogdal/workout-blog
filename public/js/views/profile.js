@@ -89,6 +89,27 @@ document.addEventListener(("DOMContentLoaded"), () => {
       workoutContainer.insertAdjacentHTML('beforeend', workoutHtml);
     });
     renderPagination(result.total_pages);
+
+    const likeBtns = document.querySelectorAll(".header__likes-button");
+    likeBtns.forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const likeCountElement = e.target.closest(".header__likes").querySelector(".header__likes-count");
+    
+        const initialLiked = e.target.dataset.liked === "true";
+        const initialLikeCount = parseInt(likeCountElement.textContent);
+    
+        e.target.dataset.liked = initialLiked ? "false" : "true";
+        likeCountElement.textContent = initialLiked ? initialLikeCount - 1 : initialLikeCount + 1;
+    
+        const url = "http://localhost/workout_blog/api/workouts/like";
+        const result = await apiCall(url, "POST", { workout_id: e.target.dataset.workout });
+        
+        if(result?.status === 'error'){
+          e.target.dataset.liked = initialLiked ? "true" : "false";
+          likeCountElement.textContent = initialLikeCount;
+        }
+      });
+    });
   }
   
   getWorkouts();
