@@ -52,7 +52,8 @@ class Database{
       id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       workout_id INT UNSIGNED NOT NULL,
       day_order INT UNSIGNED,
-      body TEXT NOT NULL
+      body TEXT NOT NULL,
+      FOREIGN KEY (workout_id) REFERENCES workouts(id) ON DELETE CASCADE
     )";
     $this->executeQuery($sql);
   }
@@ -61,7 +62,9 @@ class Database{
     $sql = "CREATE TABLE IF NOT EXISTS workout_likes(
       id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       workout_id INT UNSIGNED NOT NULL,
-      user_id INT UNSIGNED NOT NULL
+      user_id INT UNSIGNED NOT NULL,
+      FOREIGN KEY (workout_id) REFERENCES workouts(id) ON DELETE CASCADE,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     )";
     $this->executeQuery($sql);
   }
