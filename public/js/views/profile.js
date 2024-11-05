@@ -23,8 +23,14 @@ document.addEventListener(("DOMContentLoaded"), () => {
   const form = document.getElementById("addWorkoutForm");
   const responseMsg = document.getElementById("responseMessage");
 
+  const modalDelete = document.getElementById("modalDelete");
+  const modalDeleteContent = document.getElementById('modalDeleteContent');
+  const modalDeleteCancel = document.getElementById("modalDeleteCancel");
+  const modalDeleteApprove = document.getElementById('modalDeleteApprove');
+
   let state = {page: 1};
   let currentAction = "author";
+  let deleteWorkoutId = 0;
   
   let activeBtnIndex = 0;
   actionBtns.forEach((btn, index) => {
@@ -112,6 +118,16 @@ document.addEventListener(("DOMContentLoaded"), () => {
         }
       });
     });
+
+    if(currentAction === "author"){
+      const deleteBtns = document.querySelectorAll(".options__delete");
+      deleteBtns.forEach((btn)=>{
+        btn.addEventListener("click", (e)=>{
+          modalDelete.style.display = "block";
+          deleteWorkoutId = e.target.dataset.workout;
+        })
+      })
+    }
   }
   
   getWorkouts();
@@ -138,6 +154,36 @@ document.addEventListener(("DOMContentLoaded"), () => {
       sort: selectedOption.value,
       order: selectedOption.dataset.order
     })
+  })
+
+  modalDeleteCancel.addEventListener('click', () => {
+    modalDelete.style.display = "none";
+    deleteWorkoutId = 0;
+  })
+
+  modalDelete.addEventListener('click', (e) => {
+    if (e.target === modalDelete) {
+      modalDelete.style.display = "none";
+    }
+  });
+  modalDeleteContent.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  modalDeleteApprove.addEventListener('click', async () => {
+    if(deleteWorkoutId != 0){
+      loaderContainer.style.display = "flex";
+      modalDelete.style.display = "none";
+      const url = "http://localhost/workout_blog/api/workouts/delete";
+      const result = await apiCall(url, "POST", { workout_id: deleteWorkoutId });
+      deleteWorkoutId = 0;
+      if(result?.status === "success"){
+        state.page = 1;
+        getWorkouts();
+      }else{
+        loaderContainer.style.display = "none";
+      }
+    }
   })
 
   openModal && openModal.addEventListener('click', () => {
