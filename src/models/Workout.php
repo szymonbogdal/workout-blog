@@ -185,4 +185,23 @@ class Workout{
       return ["status"=>"error", "message"=>$e->getMessage()];
     }
   }
+
+  public function deleteWorkout($user_id, $workout_id){
+    try {
+      $sql = "DELETE FROM workouts WHERE id = ? AND user_id = ?";
+      $stmt = $this->db->prepare($sql);
+      $stmt->bind_param("ii", $workout_id, $user_id);
+      $stmt->execute();
+
+      if($stmt->affected_rows > 0){
+        $stmt->close();
+        return ["status"=>"success", "message"=>"Workout has been succesfully deleted."];  
+      }else{
+        $stmt->close();
+        return ["status"=>"error", "message"=>"Something went wrong."];  
+      }
+    } catch (mysqli_sql_exception $e) {
+      return ["status"=>"error", "message"=>$e->getMessage()];
+    }
+  }
 }
