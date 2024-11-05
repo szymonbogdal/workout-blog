@@ -5,9 +5,9 @@
   <div class="user-info">
     <h2 class="user-name">tymoteusz</h2>
     <div class="user-stats">
-      <p>2 posts</p>
+      <p id ="postCount"></p>
       <p>&#x2022;</p>
-      <p>100 total likes</p>
+      <p id ="likeCount"></p>
     </div>
     <button class="user-stats__button" id='modalNewOpen'>Create new workout plan</button>
     <a class="user-stats__return" href="/workout_blog">Go back to main page</a>
