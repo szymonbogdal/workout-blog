@@ -10,6 +10,7 @@ class Router{
     "/api/workouts" => ["controller" => "WorkoutController", "method" => "workouts", 'type'=>'api'], 
     "/api/workouts/new" => ["controller" => "WorkoutController", "method" => "newWorkout", 'type'=>'api'], 
     "/api/workouts/like" => ["controller" => "WorkoutController", "method" => "toggleLike", 'type'=>'api'], 
+    "/api/workouts/delete" => ["controller" => "WorkoutController", "method" => "deleteWorkout", 'type'=>'api'], 
 
     "/" => ["controller" => "PageController", "method" => "home", 'type'=>'page'],
     "/login" => ["controller" => "PageController", "method" => "login", 'type'=>'page'],
