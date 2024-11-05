@@ -61,10 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     renderPagination(result.total_pages);
 
-    const likeBtns = document.querySelectorAll(".header__likes-button");
+    const likeBtns = document.querySelectorAll(".options__like");
     likeBtns.forEach(btn => {
       btn.addEventListener('click', async (e) => {
-        const likeCountElement = e.target.closest(".header__likes").querySelector(".header__likes-count");
+        const likeCountElement = e.target.closest(".header__options").querySelector(".options__count");
     
         const initialLiked = e.target.dataset.liked === "true";
         const initialLikeCount = parseInt(likeCountElement.textContent);

@@ -60,7 +60,12 @@ input, textarea{
 .header__description{
   display: flex;
 }
-.header__likes-button{
+.header__options{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.options__like{
   border: none;
   border-radius: 50%;
   background-color: #333333;
@@ -70,12 +75,24 @@ input, textarea{
   color: #f8f9fa;
   cursor: pointer;
 }
-.header__likes-button[data-liked="true"]{
+.options__like[data-liked="true"]{
   background-color: #c1121f;
 }
-.header__likes-count{
+.options__count{
   text-align: center;
   font-weight: lighter;
+}
+.options__delete{
+  border-radius: 6px;
+  border: none;
+  background: none;
+  background-color: #c1121f;
+  color: #f8f9fa;
+  padding: 0.15rem 0.5rem;
+  cursor: pointer;
+}
+.options__delete:hover{
+  background-color: #920c15;
 }
 .header__description-item{
   color: #777777;

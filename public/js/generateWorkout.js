@@ -21,16 +21,16 @@ return `
             <p class="header__description-item">${workout.difficulty} level</p>
           </div>
         </div>
-        <div class="header__likes">
+        <div class="header__options">
           <button 
-            class="header__likes-button" 
+            class="options__like" 
             data-liked=${workout.is_liked_by_user ? 'true' : 'false'}
             data-workout=${workout.id}
             ${window.userId !== 0 ? '' : 'disabled'}
           >
             &#x2764;
           </button>
-          <p class="header__likes-count">${workout.like_count}</p>
+          <p class="options__count">${workout.like_count}</p>
           ${renderDelete ? '<button class="options__delete" data-workout='+workout.id+'>Delete</button>' : ''}
         </div>  
       </div>
