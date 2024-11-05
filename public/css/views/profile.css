@@ -185,3 +185,30 @@
   gap: 0.1rem;
   text-align: center;
 }
+
+.modal-content--delete{
+  width: 25%;
+  min-width: 400px;
+}
+.modal-title{
+  font-size: 1.5rem;
+}
+.modal-desc{
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
+}
+.modal-button{
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  background-color: #cbcdcf;
+  cursor: pointer;
+}
+.modal-button--delete{
+  background-color: #c1121f;
+  color: #f8f9fa;
+}
+.modal-button--delete:hover{
+  background-color: #920c15;
+}
