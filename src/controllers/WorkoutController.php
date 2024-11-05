@@ -38,6 +38,18 @@ class WorkoutController{
     return $this->workout->newWorkout($_SESSION['user_id'], $params['title'], $params['difficulty'], $params['workoutDays']);
   }
 
+  public function deleteWorkout(){
+    $params = json_decode(file_get_contents("php://input"), true);
+    if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
+      return ['status'=>"error", 'message'=>"You need to be logged to delete workout."];
+    }
+    if(!isset($params['workout_id'])){
+      return ['status'=>"error", 'message'=>'Missing required parameters.'];
+    }
+
+    return $this->workout->deleteWorkout($_SESSION['user_id'], $params['workout_id']);
+  }
+
   public function toggleLike(){
     $params = json_decode(file_get_contents("php://input"), true);
     if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
