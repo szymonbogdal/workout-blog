@@ -28,10 +28,21 @@ document.addEventListener(("DOMContentLoaded"), () => {
   const modalDeleteCancel = document.getElementById("modalDeleteCancel");
   const modalDeleteApprove = document.getElementById('modalDeleteApprove');
 
+  const postCount = document.getElementById("postCount");
+  const likeCount = document.getElementById("likeCount");
+
   let state = {page: 1};
   let currentAction = "author";
   let deleteWorkoutId = 0;
   
+  const getStatistics = async () => {
+    const url = "http://localhost/workout_blog/api/users/statistics";
+    const result = await apiCall(url, "GET", {user_id: window.userId});
+    postCount.innerHTML = `${result.workout_count} posts`;
+    likeCount.innerHTML = `${result.workout_likes} likes`;
+  }
+  getStatistics();
+
   let activeBtnIndex = 0;
   actionBtns.forEach((btn, index) => {
     btn.addEventListener("click", () => {
