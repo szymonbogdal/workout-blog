@@ -4,7 +4,7 @@ const generateWorkout = (workout, renderDelete = false) => {
     <h4 class="workout__day-title">${`Day ${day.day_order}`}</h4>
     <ul class="workout__day-list">
       ${day.body.split('\r\n').map(exercise => `
-        <li class="workout__day-exercise">${exercise}</li>
+        ${exercise && '<li class="workout__day-exercise">' + exercise + '</li>'}
       `).join('')}
     </ul>
   </div>
