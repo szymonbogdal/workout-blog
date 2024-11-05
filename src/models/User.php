@@ -30,4 +30,25 @@ class User{
       return ["status"=>"error", "message"=>$e->getMessage()];
     }
   }
+
+  public function getUserStatistics($user_id){
+    try{
+      $sql = 
+      "SELECT 
+        COUNT(DISTINCT w.id) as workout_count,
+        COUNT(DISTINCT wl.id) as workout_likes
+      FROM users u
+      LEFT JOIN workouts w ON u.id = w.user_id
+      LEFT JOIN workout_likes wl ON w.id = wl.workout_id
+      WHERE u.id = ?";
+
+      $stmt = $this->db->prepare($sql);
+      $stmt->bind_param("i", $user_id);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      return $result->fetch_assoc();
+    }catch(mysqli_sql_exception $e){
+      return ["status"=>"error", "message"=>$e->getMessage()];
+    }
+  }
 }
