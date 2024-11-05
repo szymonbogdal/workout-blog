@@ -20,10 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let state = {page: 1};
   
   const renderPagination = (totalPages) => {
-    const oldButtons = paginationContainer.querySelectorAll('.page-button');
-    oldButtons.forEach(button => {
-      button.replaceWith(button.cloneNode(true));
-    });
     paginationContainer.innerHTML = generatePagination(totalPages, state.page);
 
     const newButtons = paginationContainer.querySelectorAll('.page-button');
