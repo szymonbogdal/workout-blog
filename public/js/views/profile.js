@@ -16,10 +16,10 @@ document.addEventListener(("DOMContentLoaded"), () => {
   const responseError = `<p class="workout__response">There was some error. Please try again later.</p>`;
   const responseEmpty = `<p class="workout__response">No workouts found.</p>`;
   
-  const openModal = document.getElementById('openModal');
-  const closeModal = document.getElementById('closeModal');
-  const modal = document.getElementById('modal');
-  const modalContent = document.getElementById('modalContent');
+  const modalNewOpen = document.getElementById('modalNewOpen');
+  const modalNewClose = document.getElementById('modalNewClose');
+  const modalNew = document.getElementById('modalNew');
+  const modalNewContent = document.getElementById('modalNewContent');
   const form = document.getElementById("addWorkoutForm");
   const responseMsg = document.getElementById("responseMessage");
 
@@ -186,18 +186,18 @@ document.addEventListener(("DOMContentLoaded"), () => {
     }
   })
 
-  openModal && openModal.addEventListener('click', () => {
-    modal.style.display = "block";
+  modalNewOpen && modalNewOpen.addEventListener('click', () => {
+    modalNew.style.display = "block";
   })
-  closeModal.addEventListener('click', () => {
-    modal.style.display = "none";
+  modalNewClose.addEventListener('click', () => {
+    modalNew.style.display = "none";
   })
-  modal.addEventListener('click', (e) => {
+  modalNew.addEventListener('click', (e) => {
     if (e.target === modal) {
-      modal.style.display = "none";
+      modalNew.style.display = "none";
     }
   });
-  modalContent.addEventListener('click', (e) => {
+  modalNewContent.addEventListener('click', (e) => {
     e.stopPropagation();
   });
 
@@ -207,7 +207,7 @@ document.addEventListener(("DOMContentLoaded"), () => {
     const url = "http://localhost/workout_blog/api/workouts/new";
     const result = await apiCall(url, "POST", formData);
     if(result?.status == 'success'){
-      modal.style.display = "none";
+      modalNew.style.display = "none";
       getWorkouts();
     }else{
       responseMsg.innerHTML = result.message ? result.message : "Something went wrong. Try again later";

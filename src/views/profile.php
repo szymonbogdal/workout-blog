@@ -9,7 +9,7 @@
       <p>&#x2022;</p>
       <p>100 total likes</p>
     </div>
-    <button class="user-stats__button" id='openModal'>Create new workout plan</button>
+    <button class="user-stats__button" id='modalNewOpen'>Create new workout plan</button>
     <a class="user-stats__return" href="/workout_blog">Go back to main page</a>
   </div>
   <div class="content">
@@ -41,11 +41,11 @@
     </div>
   </div>
 
-  <div class="modal" id="modal">
-    <div class="modal-content" id="modalContent">
+  <div class="modal" id="modalNew">
+    <div class="modal-content" id="modalNewContent">
       <form class="modal-form" id="addWorkoutForm">
         <h2 class="form-title">Create new workout plan</h2>
-        <span class="modal-close" id="closeModal">&times;</span>
+        <span class="modal-close" id="modalNewClose">&times;</span>
         <div class="input-container">
           <label class="form-label" for="title">Title</label>
           <input class="form-input" name="title" id="title" type="text" required>
