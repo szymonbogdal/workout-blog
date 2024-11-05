@@ -97,4 +97,13 @@
       </form>
     </div>
   </div>
+
+  <div class="modal" id="modalDelete">
+    <div class="modal-content modal-content--delete" id="modalDeleteContent">
+      <h2 class="modal-title">Delete workout</h2>
+      <p class="modal-desc">This action cannot be undone!</p>
+      <button id="modalDeleteCancel" class="modal-button">Cancel</button>
+      <button id="modalDeleteApprove" class="modal-button modal-button--delete">Delete</button>
+    </div>
+  </div>
 </div>
