@@ -4,52 +4,109 @@ require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/WorkoutController.php';
 require_once __DIR__ . '/../controllers/UserController.php';
 class Router{
-  private $routes = [ 
-    "/api/register" => ["controller" => "AuthController", "method" => "register", 'type'=>'api'], 
-    "/api/login" => ["controller" => "AuthController", "method" => "login", 'type'=>'api'], 
-    "/api/logout" => ["controller" => "AuthController", "method" => "logout", 'type'=>'api'], 
+  private $routes = [
+    'GET' => [
+      '/' => 'PageController@home',
+      '/login' => 'PageController@login',
+      '/profile' => 'PageController@profile',
 
-    "/api/workouts" => ["controller" => "WorkoutController", "method" => "workouts", 'type'=>'api'], 
-    "/api/workouts/new" => ["controller" => "WorkoutController", "method" => "newWorkout", 'type'=>'api'], 
-    "/api/workouts/like" => ["controller" => "WorkoutController", "method" => "toggleLike", 'type'=>'api'], 
-    "/api/workouts/delete" => ["controller" => "WorkoutController", "method" => "deleteWorkout", 'type'=>'api'], 
+      '/api/workouts' => 'WorkoutController@workouts',
+      '/api/users/{user_id}/statistics' => 'UserController@getUserStatistics',
+    ],
+    'POST' => [
+      '/api/register' => 'AuthController@register',
+      '/api/login' => 'AuthController@login',
+      '/api/logout' => 'AuthController@logout',
 
-    "/api/users/statistics" => ["controller" => "UserController", "method" => "getUserStatistics", 'type'=>'api'], 
+      '/api/workouts' => 'WorkoutController@newWorkout',
+      '/api/workouts/{workout_id}/like' => 'WorkoutController@toggleLike'
+    ],
+    'DELETE' => [
+      '/api/workouts/{workout_id}' => 'WorkoutController@deleteWorkout'
+    ]
+];
 
-    "/" => ["controller" => "PageController", "method" => "home", 'type'=>'page'],
-    "/login" => ["controller" => "PageController", "method" => "login", 'type'=>'page'],
-    "/profile" => ["controller" => "PageController", "method" => "profile", 'type'=>'page'],
-  ]; 
+  private function matchRoute($requestUri, $requestMethod){
+    //Check if provided method is supported
+    if(!isset($this->routes[$requestMethod])){
+      return null;
+    }
 
-  public function dispatch($action) {
-    try{
-      if(!array_key_exists($action, $this->routes)){
-        throw new Exception("Action $action is not defined");
+    //Check if there is identical route (no url parameters)
+    if(isset($this->routes[$requestMethod][$requestUri])){
+      return [
+        'controller' => $this->routes[$requestMethod][$requestUri],
+        'params' => array_merge($_GET, $_POST)
+      ];
+    }
+
+    //Find corresponding route including url parameters
+    foreach($this->routes[$requestMethod] as $route => $controller){      
+      //Get names of the uri parameters
+      preg_match_all('/\{([a-zA-Z0-9_]+)\}/', $route, $paramNames);
+
+      //Convert parameter placeholder to pattern
+      $routePattern = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([^\/]+)', $route);
+      $routePattern = '#^' . $routePattern . '$#';
+
+      //Match uri with route pattern
+      if(preg_match($routePattern, $requestUri, $matches)){
+        array_shift($matches);
+        
+        //Assign every url parameter value
+        $urlParams = [];
+        foreach($paramNames[1] as $index => $paramName){
+          if(isset($matches[$index])){
+            $urlParams[$paramName] = $matches[$index];
+          }
+        }
+        return [
+          'controller' => $controller,
+          'params' =>  array_merge($urlParams, $_GET, $_POST)
+        ];
       }
-      $route = $this->routes[$action];
-      $controllerName = $route["controller"];
-      $method = $route["method"];
-      $type = $route["type"];
+    }
+
+    //No route found
+    return null;
+  }
+
+  public function dispatch($requestUri, $requestMethod) {
+    try{
+      $isApi = stripos($requestUri, '/api/') === 0;
+      $route = $this->matchRoute($requestUri, $requestMethod);
+      if(!isset($route['controller']) && isset($route['params'])){
+        throw new Exception('Action not found');
+      }
+
+      [$controllerName, $action] = explode('@', $route['controller']);
       if(!class_exists($controllerName)){
         throw new Exception("Controller $controllerName not found");
       }
-      $controller = new $controllerName();
-      if(!method_exists($controller, $method)){
-        throw new Exception("Method $method not found in $controllerName");
+
+      $controller = new $controllerName(); 
+      if(!method_exists($controller, $action)){
+        throw new Exception("Method $action not found in $controllerName");
       }
-      $result = $controller->$method();
-      if($type === 'api'){
+
+      if(!empty($route['params'])){
+        $result = $controller->$action($route['params']);  
+      }else{
+        $result = $controller->$action();
+      }
+      
+      if($isApi){
         header('Content-Type: application/json');
         echo json_encode($result);
-      }  
+      }
     }catch(Exception $e){
-      if(str_contains($action, "/api/")){
+      if($isApi){
         header('Content-Type: application/json');
         echo json_encode(['status'=>"error", 'message' => $e->getMessage()]);
       }else{
         header('Content-Type: text/html');
-        echo "<h1>Error</h1><p>".$e->getMessage()."</p>";
-      }  
+        echo "<h1>Error</h1><p>Page not found</p>";
+      }
     }
   }
 }
