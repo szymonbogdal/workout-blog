@@ -77,6 +77,9 @@ input, textarea{
 .options__like[data-liked="true"]{
   background-color: #c1121f;
 }
+.options__like:disabled{
+  cursor: not-allowed;
+}
 .options__count{
   text-align: center;
   font-weight: lighter;
