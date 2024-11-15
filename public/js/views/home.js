@@ -45,8 +45,8 @@ const setupLikeBtns = () => {
       e.target.dataset.liked = initialLiked ? "false" : "true";
       likeCountElement.textContent = initialLiked ? initialLikeCount - 1 : initialLikeCount + 1;
   
-      const url = "http://localhost/workout_blog/api/workouts/like";
-      const result = await apiCall(url, "POST", { workout_id: e.target.dataset.workout });
+      const url = `http://localhost/workout_blog/api/workouts/${e.target.dataset.workout}/like`;
+      const result = await apiCall(url, "POST");
       
       if(result?.status === 'error'){
         e.target.dataset.liked = initialLiked ? "true" : "false";
@@ -136,7 +136,7 @@ btnFilters.forEach((btn)=>{
 logoutBtn && logoutBtn.addEventListener('click', async() => {
   paginationContainer.style.display = "none";
   loader.style.display = "block";
-  const result = await apiCall("http://localhost/workout_blog/api/logout", "GET");
+  const result = await apiCall("http://localhost/workout_blog/api/logout", "POST");
   if(result.status == 'success'){
     window.location.reload();
   }

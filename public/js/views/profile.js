@@ -36,8 +36,8 @@ let activeBtnIndex = 0;
 
 //Display user statistics
 const getStatistics = async () => {
-  const url = "http://localhost/workout_blog/api/users/statistics";
-  const result = await apiCall(url, "GET", {user_id: window.userId});
+  const url = `http://localhost/workout_blog/api/users/${window.userId}/statistics`;
+  const result = await apiCall(url, "GET");
   postCount.innerHTML = `${result.workout_count} posts`;
   likeCount.innerHTML = `${result.workout_likes} likes`;
 }
@@ -69,8 +69,8 @@ const setupLikeBtns = () => {
       e.target.dataset.liked = initialLiked ? "false" : "true";
       likeCountElement.textContent = initialLiked ? initialLikeCount - 1 : initialLikeCount + 1;
   
-      const url = "http://localhost/workout_blog/api/workouts/like";
-      const result = await apiCall(url, "POST", { workout_id: e.target.dataset.workout });
+      const url = `http://localhost/workout_blog/api/workouts/${e.target.dataset.workout}/like`;
+      const result = await apiCall(url, "POST");
       
       if(result?.status === 'error'){
         e.target.dataset.liked = initialLiked ? "true" : "false";
@@ -190,8 +190,8 @@ modalDeleteApprove.addEventListener('click', async () => {
   if(deleteWorkoutId != 0){
     loaderContainer.style.display = "flex";
     modalDelete.style.display = "none";
-    const url = "http://localhost/workout_blog/api/workouts/delete";
-    const result = await apiCall(url, "POST", { workout_id: deleteWorkoutId });
+    const url = `http://localhost/workout_blog/api/workouts/${deleteWorkoutId}`;
+    const result = await apiCall(url, "DELETE");
     deleteWorkoutId = 0;
     if(result?.status === "success"){
       state.page = 1;
@@ -220,7 +220,7 @@ modalNewContent.addEventListener('click', (e) => {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = new FormData(form);
-  const url = "http://localhost/workout_blog/api/workouts/new";
+  const url = "http://localhost/workout_blog/api/workouts";
   const result = await apiCall(url, "POST", formData);
   if(result?.status == 'success'){
     modalNew.style.display = "none";
