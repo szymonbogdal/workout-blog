@@ -10,7 +10,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .user-name{
   font-size: 2.5rem;
@@ -51,7 +50,6 @@
   background-color: #f8f9fa;
   padding: 2rem;
   border-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .button-group{
   margin-bottom: 1.5rem;
@@ -62,7 +60,7 @@
   padding: 0.5rem 3rem;
   margin-right: 0.15rem;
   border-radius: 12px;
-  background-color: #cbcdcf;
+  background-color: #e5e7eb;
   cursor: pointer;
 }
 .action-button--active{
@@ -110,7 +108,6 @@
   padding: 1.5rem 2rem;
   border-radius: 25px;
   width: 60%;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .modal-form{
   display: grid;
@@ -178,7 +175,7 @@
   margin-top: 1rem;
 }
 .form-button:hover{
-  background-color: #777777;
+  background-color: #333;
 }
 .response-container{
   grid-column: 1/-1;

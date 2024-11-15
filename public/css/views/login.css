@@ -1,6 +1,5 @@
 .auth__container{
   border-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   width: 25%;
   margin: 0 auto;
   background-color: #f8f9fa;
@@ -40,7 +39,7 @@
   margin: 1rem 0;
 }
 .form__submit:hover{
-  background-color: #777777;
+  background-color: #333;
 }
 .auth__footer{
   display: flex;
