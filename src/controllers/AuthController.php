@@ -6,12 +6,12 @@ class AuthController{
     $this->user = new User();
   }
 
-  public function register(){
+  public function register($params = []){
     if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
       return ['status'=>"error", 'message'=>"User is already logged.'"];
     }
-    $username = $_POST['username'] ?? null;
-    $password = $_POST['password'] ?? null;
+    $username = $params['username'] ?? null;
+    $password = $params['password'] ?? null;
     if(!isset($username) || !isset($password)){
       return ['status'=>"error", 'message'=>'Missing username or password parameter.'];
     }
@@ -25,12 +25,12 @@ class AuthController{
     return $this->user->newUser($username, $password);
   }
 
-  public function login(){
+  public function login($params = []){
     if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
       return ['status'=>"error", 'message'=>"User is already logged.'"];
     }
-    $username = $_POST['username'] ?? null;
-    $password = $_POST['password'] ?? null;
+    $username = $params['username'] ?? null;
+    $password = $params['password'] ?? null;
     if(!isset($username) || !isset($password)){
       return ['status'=>"error", 'message'=>"Missing username or password parameter.'"];
     }

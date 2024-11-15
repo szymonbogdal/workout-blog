@@ -7,8 +7,7 @@ class WorkoutController{
     $this->workout = new Workout();
     $this->workoutLike = new WorkoutLike();
   }
-  public function workouts(){
-    $params = $_GET;
+  public function workouts($params = []){
     if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
       $params['user_id'] = $_SESSION['user_id'];
     }
@@ -20,8 +19,7 @@ class WorkoutController{
     return $this->workout->getWorkouts($params);
   }
 
-  public function newWorkout(){
-    $params = $_POST;
+  public function newWorkout($params = []){
     if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
       return ['status'=>"error", 'message'=>"You need to be logged to add new workout."];
     }
@@ -38,8 +36,7 @@ class WorkoutController{
     return $this->workout->newWorkout($_SESSION['user_id'], $params['title'], $params['difficulty'], $params['workoutDays']);
   }
 
-  public function deleteWorkout(){
-    $params = json_decode(file_get_contents("php://input"), true);
+  public function deleteWorkout($params = []){
     if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
       return ['status'=>"error", 'message'=>"You need to be logged to delete workout."];
     }
@@ -50,8 +47,7 @@ class WorkoutController{
     return $this->workout->deleteWorkout($_SESSION['user_id'], $params['workout_id']);
   }
 
-  public function toggleLike(){
-    $params = json_decode(file_get_contents("php://input"), true);
+  public function toggleLike($params = []){
     if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
       return ['status'=>"error", 'message'=>"You need to be logged to like workout."];
     }
