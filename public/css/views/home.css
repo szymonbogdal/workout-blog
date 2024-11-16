@@ -118,10 +118,20 @@
   margin: auto;
   align-self: center;
 }
-.ellipsis{
-  font-size: 1.25rem;
-  color: #333333;
-  height: fit-content;
-  align-self: end;
-  margin-right: 1rem;
+
+@media screen and (max-width: 1300px) {
+  .workout__container{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 900px) {
+  .workout__container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 768px) {
+  .sidebar {
+    display: none;
+    
+  }
 }
