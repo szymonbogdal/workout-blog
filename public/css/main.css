@@ -151,3 +151,34 @@ input, textarea{
   border: none;
   margin-right: 0;
 }
+
+
+@media screen and (max-width: 1024px) {
+  .workout__container{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .workout__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .workout__container {
+    grid-template-columns: 1fr !important;
+  }
+  .workout__header{
+    flex-wrap: wrap;
+  }
+  .header__description{
+    flex-direction: column;
+  }
+  .header__description-item:nth-of-type(2){
+    display: none;
+  }
+  .header__options{
+    margin-left: auto;
+  }
+}
