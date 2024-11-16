@@ -11,6 +11,9 @@ const btnFilters = document.querySelectorAll(".btn-difficulty")
 const sortFilter = document.getElementById('sortFilter');
 const logoutBtn = document.getElementById('logoutButton');
 const loginBtn = document.getElementById('loginButton');
+const sidebar = document.getElementById('sidebar');
+const sidebarOpenBtn = document.getElementById('sidebarOpenBtn');
+const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
 
 const responseError = `<p class="workout__response">There was some error. Please try again later.</p>`
 const responseEmpty = `<p class="workout__response">No workouts found.</p>`
@@ -146,6 +149,14 @@ logoutBtn && logoutBtn.addEventListener('click', async() => {
 
 loginBtn && loginBtn.addEventListener('click', () => {
   window.location.href = '/workout_blog/login';
+})
+
+//Display/hide sidebar on smaller screens
+sidebarOpenBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+})
+sidebarCloseBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
 })
 
 //Initialize application
