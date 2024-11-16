@@ -55,9 +55,15 @@ input, textarea{
 }
 .header__tilte{
   font-size: 2.5rem;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .header__description{
   display: flex;
+}
+.header__description-item{
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .header__options{
   display: flex;
@@ -114,6 +120,8 @@ input, textarea{
 }
 .workout__day-exercise{
   margin-left: 1.5rem;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .workout__response{
   text-align: center;
