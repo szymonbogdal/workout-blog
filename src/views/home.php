@@ -1,6 +1,7 @@
 <div class="container">
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
     <h2 class="sidebar__title">Workout Planner</h2>
+    <button class="sidebar__close-btn" id="sidebarCloseBtn">&times;</button>
     <input class="input input--main" placeholder="Search workouts..." id="titleFilter" name="title">
     <section class="filters">
       <h3 class="filters__header">Filters</h3>
@@ -36,7 +37,12 @@
 
   
   <div class="content">
-    <div class="loader--workout" id="loader"></div>  
+    <div class="loader--workout" id="loader"></div> 
+    
+    <div class="options-container">
+      <button class="sidebar-open-btn" id="sidebarOpenBtn">&#9776;</button>
+    </div>
+
     <div class="workout-container" id="workoutContainer">
     
     </div>
