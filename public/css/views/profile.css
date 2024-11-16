@@ -53,12 +53,16 @@
 }
 .button-group{
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 .action-button{
   border: none;
   font-size: 1.25rem;
   padding: 0.5rem 3rem;
-  margin-right: 0.15rem;
   border-radius: 12px;
   background-color: #e5e7eb;
   cursor: pointer;
@@ -70,7 +74,7 @@
 .filters__group{
   display: inline-block;
   width: 40%;
-  margin-right: 3rem;
+  margin-right: 1rem;
 }
 .filters__label{
   display: inline-block;
@@ -86,6 +90,7 @@
   border: none;
   border: solid 0.05rem #cbcdcf;
   background: none;
+  box-sizing: border-box;
 }
 .workout{
   margin-top: 1rem;
@@ -101,6 +106,8 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 .modal-content{
   background-color: #f8f9fa;
@@ -185,7 +192,7 @@
 
 .modal-content--delete{
   width: 25%;
-  min-width: 400px;
+  min-width: 200px;
 }
 .modal-title{
   font-size: 1.5rem;
@@ -208,4 +215,66 @@
 }
 .modal-button--delete:hover{
   background-color: #920c15;
+}
+
+@media screen and (max-width: 1024px) {
+  .modal-form{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 768px) {
+  .filters__group {
+    width: 100%;
+    margin-right: 0;
+  }
+
+
+  .modal-form{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .modal-content{
+    width: 75%;
+  }
+  .modal-close{
+    position: absolute;
+    top: 2rem;
+    right: 4rem;
+  }
+  .form-title{
+    grid-column: 1 / -1;
+    margin-right: 4rem;
+  }
+  .input-container{
+    grid-column: 1 / -2;
+  }
+  .select-container{
+    grid-column: -1 / -2;
+  }
+}
+@media screen and (max-width: 480px) {
+  .modal-form{
+    grid-template-columns: 1fr;
+  }
+  .modal-close{
+    top: 2rem;
+    right: 2rem;
+  }
+  .form-title{
+    margin-right: 2rem;
+  }
+  .input-container{
+    grid-column: 1 / -1;
+  }
+  .select-container{
+    grid-column: 1 / -1;
+  }
+  .textarea-container{
+    grid-column: 1 / -1;
+  }
+  .user-info{
+    width: 75%;
+  }
+  .content{
+    width: 100%;
+  }
 }
