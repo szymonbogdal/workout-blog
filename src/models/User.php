@@ -7,27 +7,35 @@ class User{
   }
 
   public function newUser($username, $password){
-    $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-    $stmt = $this->db->prepare($sql);
-    $stmt->bind_param('ss', $username, $password);
     try{
+      $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+      $stmt = $this->db->prepare($sql);
+      $stmt->bind_param('ss', $username, $password);
       $stmt->execute();
       return ["status"=>"success", "message"=>"User has been succesfully created." ];
     }catch(mysqli_sql_exception $e){
       return ["status"=>"error", "message"=>$e->getMessage()];
+    }finally{
+      if(isset($stmt)){
+        $stmt->close();
+      }
     }
   }
 
   public function getUser($username){
-    $sql =  "SELECT * FROM users WHERE username = ?";
-    $stmt = $this->db->prepare($sql);
-    $stmt->bind_param('s', $username);
     try{
+      $sql =  "SELECT * FROM users WHERE username = ?";
+      $stmt = $this->db->prepare($sql);
+      $stmt->bind_param('s', $username);
       $stmt->execute();
       $result = $stmt->get_result();
       return $result->fetch_assoc();
     }catch(mysqli_sql_exception $e){
       return ["status"=>"error", "message"=>$e->getMessage()];
+    }finally{
+      if(isset($stmt)){
+        $stmt->close();
+      }
     }
   }
 
@@ -49,6 +57,10 @@ class User{
       return $result->fetch_assoc();
     }catch(mysqli_sql_exception $e){
       return ["status"=>"error", "message"=>$e->getMessage()];
+    }finally{
+      if(isset($stmt)){
+        $stmt->close();
+      }
     }
   }
 }
