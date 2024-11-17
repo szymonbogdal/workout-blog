@@ -42,7 +42,8 @@ class User{
   public function getUserStatistics($user_id){
     try{
       $sql = 
-      "SELECT 
+      "SELECT
+        u.username, 
         COUNT(DISTINCT w.id) as workout_count,
         COUNT(DISTINCT wl.id) as workout_likes
       FROM users u
