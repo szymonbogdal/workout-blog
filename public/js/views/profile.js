@@ -26,6 +26,7 @@ const modalDeleteApprove = document.getElementById('modalDeleteApprove');
 
 const postCount = document.getElementById("postCount");
 const likeCount = document.getElementById("likeCount");
+const userNameField = document.getElementById("userName");
 
 const responseError = `<p class="workout__response">There was some error. Please try again later.</p>`;
 const responseEmpty = `<p class="workout__response">No workouts found.</p>`;
@@ -39,6 +40,7 @@ let activeBtnIndex = 0;
 const getStatistics = async () => {
   const url = `http://localhost/workout_blog/api/users/${window.userId}/statistics`;
   const result = await apiCall(url, "GET");
+  userNameField.innerHTML = result.username;
   postCount.innerHTML = `${formatNumber(result.workout_count)} posts`;
   likeCount.innerHTML = `${formatNumber(result.workout_likes)} likes`;
 }

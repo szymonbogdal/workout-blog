@@ -3,7 +3,7 @@
 </div>
 <div class="container">
   <div class="user-info">
-    <h2 class="user-name">tymoteusz</h2>
+    <h2 class="user-name" id="userName"></h2>
     <div class="user-stats">
       <p id ="postCount"></p>
       <p>&#x2022;</p>
