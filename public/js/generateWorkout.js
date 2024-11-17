@@ -1,3 +1,5 @@
+import formatNumber from "./formatNumber.js";
+
 const generateWorkout = (workout, renderDelete = false) => {
   const workoutDaysHTML = workout.workout_days.map((day, index) => `
   <div class="workout__day">
@@ -30,7 +32,7 @@ return `
           >
             &#x2764;
           </button>
-          <p class="options__count">${workout.like_count}</p>
+          <p class="options__count">${formatNumber(workout.like_count)}</p>
           ${renderDelete ? '<button class="options__delete" data-workout='+workout.id+'>Delete</button>' : ''}
         </div>  
       </div>

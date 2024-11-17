@@ -2,6 +2,7 @@ import apiCall from "../apiCall.js";
 import generateWorkout from "../generateWorkout.js";
 import generatePagination from "../generatePagination.js";
 import debounce from "../debounce.js";
+import formatNumber from "../formatNumber.js";
 
 const workoutContainer = document.getElementById('workoutContainer');
 const paginationContainer = document.getElementById("paginationContainer");
@@ -38,8 +39,8 @@ let activeBtnIndex = 0;
 const getStatistics = async () => {
   const url = `http://localhost/workout_blog/api/users/${window.userId}/statistics`;
   const result = await apiCall(url, "GET");
-  postCount.innerHTML = `${result.workout_count} posts`;
-  likeCount.innerHTML = `${result.workout_likes} likes`;
+  postCount.innerHTML = `${formatNumber(result.workout_count)} posts`;
+  likeCount.innerHTML = `${formatNumber(result.workout_likes)} likes`;
 }
 
 //Render pagination buttons and add event listener to change page
