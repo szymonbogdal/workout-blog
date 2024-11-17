@@ -8,7 +8,7 @@ class WorkoutController{
     $this->workoutLike = new WorkoutLike();
   }
   public function workouts($params = []){
-    if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
+    if(isset($_SESSION['user_id'])){
       $params['user_id'] = $_SESSION['user_id'];
     }
     if(!isset($params['page']) || !is_numeric($params['page'])){
@@ -20,7 +20,7 @@ class WorkoutController{
   }
 
   public function newWorkout($params = []){
-    if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
+    if(!isset($_SESSION['user_id'])){
       return ['status'=>"error", 'message'=>"You need to be logged to add new workout."];
     }
     if(!isset($params['title']) || !isset($params['difficulty']) || !isset($params["workoutDays"][0])){
@@ -37,7 +37,7 @@ class WorkoutController{
   }
 
   public function deleteWorkout($params = []){
-    if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
+    if(!isset($_SESSION['user_id'])){
       return ['status'=>"error", 'message'=>"You need to be logged to delete workout."];
     }
     if(!isset($params['workout_id'])){
@@ -48,7 +48,7 @@ class WorkoutController{
   }
 
   public function toggleLike($params = []){
-    if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
+    if(!isset($_SESSION['user_id'])){
       return ['status'=>"error", 'message'=>"You need to be logged to like workout."];
     }
     if(!isset($params['workout_id'])){

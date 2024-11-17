@@ -8,7 +8,7 @@ class PageController{
     require __DIR__ . "/../views/layout.php";
   }
   public function login(){
-    if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
+    if(isset($_SESSION['user_id'])){
       header("Location: /workout_blog");
     }
     $title = "Login";
@@ -18,7 +18,7 @@ class PageController{
     require __DIR__ . "/../views/layout.php";
   }
   public function profile(){
-    if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
+    if(!isset($_SESSION['user_id'])){
       header("Location: /workout_blog");
     }
     $title = "Profile";

@@ -7,7 +7,7 @@ class AuthController{
   }
 
   public function register($params = []){
-    if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
+    if(isset($_SESSION['user_id'])){
       return ['status'=>"error", 'message'=>"User is already logged.'"];
     }
     $username = $params['username'] ?? null;
@@ -26,7 +26,7 @@ class AuthController{
   }
 
   public function login($params = []){
-    if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
+    if(isset($_SESSION['user_id'])){
       return ['status'=>"error", 'message'=>"User is already logged.'"];
     }
     $username = $params['username'] ?? null;
@@ -42,11 +42,10 @@ class AuthController{
       return ['status'=>"error", 'message'=>"Invaild username or password."];
     }
     $_SESSION['user_id'] = $user['id'];
-    $_SESSION['username'] = $user['username'];
     return ['status'=>"success", 'message'=>"User $username logged in."];
   }
   public function logout(){
-    if(!isset($_SESSION['user_id']) || !isset($_SESSION['username'])){
+    if(!isset($_SESSION['user_id'])){
       return ['status'=>"error", 'message'=>"There is no logged user."];
     }
     session_unset();
