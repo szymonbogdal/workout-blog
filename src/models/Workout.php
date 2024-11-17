@@ -145,12 +145,19 @@ class Workout{
       ];
     }catch(mysqli_sql_exception $e){
       return ["status"=>"error", "message"=>$e->getMessage()];
+    }finally{
+      if(isset($workoutStmt)){
+        $workoutStmt->close();
+      }
+      if(isset($dayStmt)){
+        $dayStmt->close();
+      }
     }
   }
 
   public function newWorkout($user_id, $title, $difficulty, $days){
     $this->db->begin_transaction();
-    try {
+    try{
       $workoutSql = "INSERT INTO workouts (user_id, title, difficulty) VALUES (?, ?, ?)";
       $workoutStmt = $this->db->prepare($workoutSql);
       $workoutStmt->bind_param("iss", $user_id, $title, $difficulty);
@@ -180,28 +187,37 @@ class Workout{
 
       $this->db->commit();
       return ["status"=>"success", "message"=>"Workout has been succesfully created." ];
-    } catch (mysqli_sql_exception $e) {
+    }catch(mysqli_sql_exception $e){
       $this->db->rollback();
       return ["status"=>"error", "message"=>$e->getMessage()];
+    }finally{
+      if(isset($workoutStmt)){
+        $workoutStmt->close();
+      }
+      if(isset($dayStmt)){
+        $dayStmt->close();
+      }
     }
   }
 
   public function deleteWorkout($user_id, $workout_id){
-    try {
+    try{
       $sql = "DELETE FROM workouts WHERE id = ? AND user_id = ?";
       $stmt = $this->db->prepare($sql);
       $stmt->bind_param("ii", $workout_id, $user_id);
       $stmt->execute();
 
       if($stmt->affected_rows > 0){
-        $stmt->close();
         return ["status"=>"success", "message"=>"Workout has been succesfully deleted."];  
       }else{
-        $stmt->close();
         return ["status"=>"error", "message"=>"Something went wrong."];  
       }
-    } catch (mysqli_sql_exception $e) {
+    }catch(mysqli_sql_exception $e){
       return ["status"=>"error", "message"=>$e->getMessage()];
+    }finally{
+      if(isset($stmt)){
+        $stmt->close();
+      }
     }
   }
 }
