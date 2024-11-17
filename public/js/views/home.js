@@ -30,7 +30,7 @@ const renderPagination = (totalPages) => {
     button.addEventListener('click', () => {
       const page = parseInt(button.dataset.page);
       state.page = page;
-      getWokrouts();
+      getWorkouts();
     });
   });
 }
@@ -60,7 +60,7 @@ const setupLikeBtns = () => {
 }
 
 //Get all workouts, re-apply pagination and like buttons listeners
-const getWokrouts = async () => {
+const getWorkouts = async () => {
   workoutContainer.innerHTML = null;
   paginationContainer.style.display = "none";
   loader.style.display = "block";
@@ -99,7 +99,7 @@ const filterWorkouts = (updates) => {
       state = { ...state, [key]: val };
     }
   }
-  getWokrouts();
+  getWorkouts();
 }
 
 //Debounce for text inputs
@@ -160,5 +160,5 @@ sidebarCloseBtn.addEventListener('click', () => {
 })
 
 //Initialize application
-getWokrouts();
+getWorkouts();
 
