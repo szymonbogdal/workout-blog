@@ -35,7 +35,7 @@ class AuthController{
       return ['status'=>"error", 'message'=>"Missing username or password parameter.'"];
     }
     $user =  $this->user->getUser($username);
-    if(!isset($user['username']) || !isset($user['password'])){
+    if(!isset($user['username']) || !isset($user['password']) || !isset($user['id'])){
       return ['status'=>"error", 'message'=>"Invaild username or password."];
     }
     if(!password_verify($password, $user['password'])){
