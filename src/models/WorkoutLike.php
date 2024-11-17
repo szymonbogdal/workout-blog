@@ -13,7 +13,6 @@ class WorkoutLike{
       $selectStmt->bind_param("ii", $workout_id, $user_id);
       $selectStmt->execute();
       $selectResult = $selectStmt->get_result();
-      $selectStmt->close();
 
       if($selectResult->num_rows > 0){
         $workoutLike = $selectResult->fetch_assoc();
@@ -21,18 +20,26 @@ class WorkoutLike{
         $deleteStmt = $this->db->prepare($deleteSql);
         $deleteStmt->bind_param("i", $workoutLike['id']);
         $deleteStmt->execute();
-        $deleteStmt->close();
         return ["status"=>"success", "message"=>"unliked"];
       }else{
         $insertSql = "INSERT INTO workout_likes (workout_id, user_id) VALUES (?, ?)";
         $insertStmt = $this->db->prepare($insertSql);
         $insertStmt->bind_param("ii", $workout_id, $user_id);
         $insertStmt->execute();
-        $insertStmt->close();
         return ["status"=>"success", "message"=>"liked"];
       }
     }catch(mysqli_sql_exception $e){
       return ["status"=>"error", "message"=>$e->getMessage()];
+    }finally{
+      if(isset($selectStmt)){
+        $selectStmt->close();
+      }
+      if(isset($deleteStmt)){
+        $deleteStmt->close();
+      }
+      if(isset($insertStmt)){
+        $insertStmt->close();
+      }
     }
   }
 }
