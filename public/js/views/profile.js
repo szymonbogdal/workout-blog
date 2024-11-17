@@ -40,9 +40,9 @@ let activeBtnIndex = 0;
 const getStatistics = async () => {
   const url = `http://localhost/workout_blog/api/users/${window.userId}/statistics`;
   const result = await apiCall(url, "GET");
-  userNameField.innerHTML = result.username;
-  postCount.innerHTML = `${formatNumber(result.workout_count)} posts`;
-  likeCount.innerHTML = `${formatNumber(result.workout_likes)} likes`;
+  userNameField.innerHTML = result?.username ? result.username : "username";
+  postCount.innerHTML = result?.workout_count ? `${formatNumber(result.workout_count)} posts` : "0 posts";
+  likeCount.innerHTML = result?.workout_likes ? `${formatNumber(result.workout_likes)} likes`: "0 likes";
 }
 
 //Render pagination buttons and add event listener to change page
