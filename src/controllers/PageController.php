@@ -27,4 +27,11 @@ class PageController{
     $content = __DIR__ . "/../views/profile.php";
     require __DIR__ . "/../views/layout.php";
   }
+
+  public function error($code = 404){
+    $title = "Error $code";
+    $css = "error.css";
+    $content = __DIR__ . "/../views/error.php";
+    require __DIR__ . "/../views/layout.php";
+  }
 }
