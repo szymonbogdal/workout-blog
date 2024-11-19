@@ -75,18 +75,18 @@ class Router{
     try{
       $isApi = stripos($requestUri, '/api/') === 0;
       $route = $this->matchRoute($requestUri, $requestMethod);
-      if(!isset($route['controller']) && isset($route['params'])){
-        throw new Exception('Action not found');
+      if(!isset($route['controller']) && !isset($route['params'])){
+        throw new Exception('Action not found', 404);
       }
 
       [$controllerName, $action] = explode('@', $route['controller']);
       if(!class_exists($controllerName)){
-        throw new Exception("Controller $controllerName not found");
+        throw new Exception("Controller $controllerName not found", 404);
       }
 
       $controller = new $controllerName(); 
       if(!method_exists($controller, $action)){
-        throw new Exception("Method $action not found in $controllerName");
+        throw new Exception("Method $action not found in $controllerName", 404);
       }
 
       if(!empty($route['params'])){
@@ -102,6 +102,7 @@ class Router{
     }catch(Exception $e){
       if($isApi){
         header('Content-Type: application/json');
+        http_response_code($e->getCode() ?: 500);
         echo json_encode(['status'=>"error", 'message' => $e->getMessage()]);
       }else{
         header('Content-Type: text/html');
