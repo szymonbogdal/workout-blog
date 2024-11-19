@@ -81,12 +81,12 @@ class Router{
 
       [$controllerName, $action] = explode('@', $route['controller']);
       if(!class_exists($controllerName)){
-        throw new Exception("Controller $controllerName not found", 404);
+        throw new Exception('Action not found', 404);
       }
 
       $controller = new $controllerName(); 
       if(!method_exists($controller, $action)){
-        throw new Exception("Method $action not found in $controllerName", 404);
+        throw new Exception('Action not found', 404);
       }
 
       if(!empty($route['params'])){
