@@ -105,8 +105,8 @@ class Router{
         http_response_code($e->getCode() ?: 500);
         echo json_encode(['status'=>"error", 'message' => $e->getMessage()]);
       }else{
-        header('Content-Type: text/html');
-        echo "<h1>Error</h1><p>Page not found</p>";
+        $pageController = new PageController();
+        $pageController->error($e->getCode() ?: 500);
       }
     }
   }
