@@ -12,9 +12,12 @@ class User{
       $stmt = $this->db->prepare($sql);
       $stmt->bind_param('ss', $username, $password);
       $stmt->execute();
-      return ["status"=>"success", "message"=>"User has been succesfully created." ];
+      return ["code" => 201, "message" => "User has been succesfully created." ];
     }catch(mysqli_sql_exception $e){
-      return ["status"=>"error", "message"=>$e->getMessage()];
+      if($e->getCode() == 1062){
+        return ["code" => 409, "message" => "Username already taken."];
+      }
+      return ["code" => 500, "message" => "Internal server error"];
     }finally{
       if(isset($stmt)){
         $stmt->close();
@@ -29,9 +32,9 @@ class User{
       $stmt->bind_param('s', $username);
       $stmt->execute();
       $result = $stmt->get_result();
-      return $result->fetch_assoc();
+      return ["code" => 200, "data" => $result->fetch_assoc()];
     }catch(mysqli_sql_exception $e){
-      return ["status"=>"error", "message"=>$e->getMessage()];
+      return ["code" => 500, "message" => "Internal server error"];
     }finally{
       if(isset($stmt)){
         $stmt->close();
@@ -55,9 +58,9 @@ class User{
       $stmt->bind_param("i", $user_id);
       $stmt->execute();
       $result = $stmt->get_result();
-      return $result->fetch_assoc();
+      return ["code" => 200, "data" => $result->fetch_assoc()];
     }catch(mysqli_sql_exception $e){
-      return ["status"=>"error", "message"=>$e->getMessage()];
+      return ["code" => 500, "message" => "Internal server error."];
     }finally{
       if(isset($stmt)){
         $stmt->close();

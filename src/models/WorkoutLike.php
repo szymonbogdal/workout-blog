@@ -20,16 +20,16 @@ class WorkoutLike{
         $deleteStmt = $this->db->prepare($deleteSql);
         $deleteStmt->bind_param("i", $workoutLike['id']);
         $deleteStmt->execute();
-        return ["status"=>"success", "message"=>"unliked"];
+        return ["code" => 204, "message" => "Succesfully unliked workout."];
       }else{
         $insertSql = "INSERT INTO workout_likes (workout_id, user_id) VALUES (?, ?)";
         $insertStmt = $this->db->prepare($insertSql);
         $insertStmt->bind_param("ii", $workout_id, $user_id);
         $insertStmt->execute();
-        return ["status"=>"success", "message"=>"liked"];
+        return ["code" => 201, "message" => "Succesfully liked workout."];
       }
     }catch(mysqli_sql_exception $e){
-      return ["status"=>"error", "message"=>$e->getMessage()];
+      return ["code" => 500, "message" => "Internal server error."];
     }finally{
       if(isset($selectStmt)){
         $selectStmt->close();

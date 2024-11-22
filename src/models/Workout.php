@@ -139,12 +139,9 @@ class Workout{
           ];
         }
       }
-      return [
-        "data"=>$workouts,
-        "total_pages"=>ceil($totalCount / $params['per_page']),
-      ];
+      return ["code" => 200, "data" => $workouts, "total_pages" => ceil($totalCount / $params['per_page'])];
     }catch(mysqli_sql_exception $e){
-      return ["status"=>"error", "message"=>$e->getMessage()];
+      return ["code" => 500, "message" => "Internal server error."];
     }finally{
       if(isset($workoutStmt)){
         $workoutStmt->close();
@@ -186,10 +183,10 @@ class Workout{
       $dayStmt->execute();
 
       $this->db->commit();
-      return ["status"=>"success", "message"=>"Workout has been succesfully created." ];
+      return ["code" => 201, "message" => "Workout has been succesfully created." ];
     }catch(mysqli_sql_exception $e){
       $this->db->rollback();
-      return ["status"=>"error", "message"=>$e->getMessage()];
+      return ["code" => 500, "message" => "Internal server error."];
     }finally{
       if(isset($workoutStmt)){
         $workoutStmt->close();
@@ -208,12 +205,12 @@ class Workout{
       $stmt->execute();
 
       if($stmt->affected_rows > 0){
-        return ["status"=>"success", "message"=>"Workout has been succesfully deleted."];  
+        return ["code" => 204, "message" => "Workout has been succesfully deleted."];  
       }else{
-        return ["status"=>"error", "message"=>"Something went wrong."];  
+        return ["code" => 404, "message" => "Workout not found."];  
       }
     }catch(mysqli_sql_exception $e){
-      return ["status"=>"error", "message"=>$e->getMessage()];
+      return ["code" => 500, "message" => "Internal server error."];
     }finally{
       if(isset($stmt)){
         $stmt->close();
