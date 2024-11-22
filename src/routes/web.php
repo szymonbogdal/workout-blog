@@ -97,13 +97,23 @@ class Router{
       
       if($isApi){
         header('Content-Type: application/json');
-        echo json_encode($result);
+        http_response_code($result['code'] ?? 500);
+        
+        $resposne = 
+          isset($result['data']) 
+          ? ['data' => $result['data']] 
+          : ['message' => $result['message'] ?? 'Internal server error'];
+        
+        if(isset($result['total_pages'])){
+          $resposne['total_pages'] = $result['total_pages'];
+        }
+        echo json_encode($resposne);
       }
     }catch(Exception $e){
       if($isApi){
         header('Content-Type: application/json');
         http_response_code($e->getCode() ?: 500);
-        echo json_encode(['status'=>"error", 'message' => $e->getMessage()]);
+        echo json_encode(['message' => $e->getMessage()]);
       }else{
         $pageController = new PageController();
         $pageController->error($e->getCode() ?: 500);
