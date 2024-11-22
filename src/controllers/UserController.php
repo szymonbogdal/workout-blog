@@ -8,7 +8,7 @@ class UserController{
 
   public function getUserStatistics($params = []){
     if(!isset($params['user_id'])){
-      return ['status'=>"error", 'message'=>'Missing required parameters.'];
+      return ["code" => 400, "message" => "Missing required parameters."];
     }
     return $this->user->getUserStatistics($params['user_id']);
   }

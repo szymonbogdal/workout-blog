@@ -21,16 +21,16 @@ class WorkoutController{
 
   public function newWorkout($params = []){
     if(!isset($_SESSION['user_id'])){
-      return ['status'=>"error", 'message'=>"You need to be logged to add new workout."];
+      return ["code" => 401, "message" => "You need to be logged to add new workout."];
     }
     if(!isset($params['title']) || !isset($params['difficulty']) || !isset($params["workoutDays"][0])){
-      return ['status'=>"error", 'message'=>'Missing required parameters.'];
+      return ["code" => 400, "message" => "Missing required parameters."];
     }
     if(strlen($params['title']) > 255){
-      return ['status'=>"error", 'message'=>'Title can not be longer than 255 characters.'];
+      return ["code" => 400, "message" => "Title can not be longer than 255 characters."];
     }
     if(!in_array($params['difficulty'], ["beginner", "intermediate", "advanced"])){
-      return ['status'=>"error", 'message'=>'Difficulty is wrongly formatted.'];
+      return ["code" => 400, "message" => "Difficulty is wrongly formatted."];
     }
     
     return $this->workout->newWorkout($_SESSION['user_id'], $params['title'], $params['difficulty'], $params['workoutDays']);
@@ -38,10 +38,10 @@ class WorkoutController{
 
   public function deleteWorkout($params = []){
     if(!isset($_SESSION['user_id'])){
-      return ['status'=>"error", 'message'=>"You need to be logged to delete workout."];
+      return ["code" => 401, "message" => "You need to be logged to delete workout."];
     }
     if(!isset($params['workout_id'])){
-      return ['status'=>"error", 'message'=>'Missing required parameters.'];
+      return ["code" => 400, "message" => "Missing required parameters."];
     }
 
     return $this->workout->deleteWorkout($_SESSION['user_id'], $params['workout_id']);
@@ -49,10 +49,10 @@ class WorkoutController{
 
   public function toggleLike($params = []){
     if(!isset($_SESSION['user_id'])){
-      return ['status'=>"error", 'message'=>"You need to be logged to like workout."];
+      return ["code" => 401, "message" => "You need to be logged to like workout."];
     }
     if(!isset($params['workout_id'])){
-      return ['status'=>"error", 'message'=>'Missing required parameters.'];
+      return ["code" => 400, "message" => "Missing required parameters."];
     }
     
     return $this->workoutLike->toggleLike($params['workout_id'], $_SESSION['user_id']);
