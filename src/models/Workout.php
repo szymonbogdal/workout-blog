@@ -205,7 +205,7 @@ class Workout{
       $stmt->execute();
 
       if($stmt->affected_rows > 0){
-        return ["code" => 204, "message" => "Workout has been succesfully deleted."];  
+        return ["code" => 204];  
       }else{
         return ["code" => 404, "message" => "Workout not found."];  
       }

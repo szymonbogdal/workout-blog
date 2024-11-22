@@ -20,7 +20,7 @@ class WorkoutLike{
         $deleteStmt = $this->db->prepare($deleteSql);
         $deleteStmt->bind_param("i", $workoutLike['id']);
         $deleteStmt->execute();
-        return ["code" => 204, "message" => "Succesfully unliked workout."];
+        return ["code" => 204];
       }else{
         $insertSql = "INSERT INTO workout_likes (workout_id, user_id) VALUES (?, ?)";
         $insertStmt = $this->db->prepare($insertSql);
