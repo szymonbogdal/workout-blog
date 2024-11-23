@@ -98,19 +98,25 @@ const setupDeleteBtns = () => {
 //Get all workouts, re-aply pagination, like and delete buttons listeners
 const getWorkouts = async () => {
   workoutContainer.innerHTML = null;
+  paginationContainer.style.display = "none";
   loaderContainer.style.display = "flex";
+  
 
   const url = "http://localhost/workout_blog/api/workouts";
   const result = await apiCall(url, "GET", {...state, [currentAction]: window.userId});
-
+  
+  paginationContainer.style.display = "flex";
   loaderContainer.style.display = "none";
+  
   if(!result || result.status === 'error'){
     workoutContainer.insertAdjacentHTML('beforeend', responseError);  
+    paginationContainer.innerHTML = null;
     return;
   }
 
   if(result.data.length == 0){
     workoutContainer.insertAdjacentHTML('beforeend', responseEmpty);
+    paginationContainer.innerHTML = null;
     return;
   }
 
