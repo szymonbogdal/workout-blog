@@ -148,10 +148,6 @@
   display: none;
 }
 
-.workout:first-of-type{
-  margin-top: 1rem;
-}
-
 @media screen and (max-width: 1300px) {
   .workout__container{
     grid-template-columns: repeat(3, 1fr);
@@ -174,6 +170,9 @@
   }
   .sidebar-open-btn{
     display: block;
+  }
+  .workout:first-of-type{
+    margin-top: 1rem;
   }
 }
 @media screen and (max-width: 320px) {
