@@ -14,10 +14,10 @@ form.addEventListener('submit', async (e) => {
   loaderContainer.style.display = "flex";
   e.preventDefault();
   const formData = new FormData(form);
-  const url = `http://localhost/workout_blog/api/${isLogin ? "login" : "register"}`;
+  const url = `http://localhost/workout-blog/api/${isLogin ? "login" : "register"}`;
   const result = await apiCall(url, "POST", formData);
   if(isLogin && result?.status == 'success'){
-    window.location.href = '/workout_blog';
+    window.location.href = '/workout-blog';
   }else{
     responseMsg.innerHTML = result?.message ? result.message : "Something went wrong. Try again later";
   }

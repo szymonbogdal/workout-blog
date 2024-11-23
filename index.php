@@ -5,7 +5,7 @@ require_once __DIR__ . "/src/routes/web.php";
 
 $requestUri = parse_url($_SERVER['REQUEST_URI'])['path'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
-$basePath = '/workout_blog';
+$basePath = '/workout-blog';
 if(strpos($requestUri, $basePath) === 0){
   $requestUri = substr($requestUri, strlen($basePath));
 }

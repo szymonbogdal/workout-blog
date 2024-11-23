@@ -2,7 +2,7 @@
 RewriteEngine On
 
 # Set the base directory
-RewriteBase /workout_blog/
+RewriteBase /workout-blog/
 
 # Allow direct access to public directory
 RewriteRule ^public/ - [L]

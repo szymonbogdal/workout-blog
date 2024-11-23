@@ -9,7 +9,7 @@ class PageController{
   }
   public function login(){
     if(isset($_SESSION['user_id'])){
-      header("Location: /workout_blog");
+      header("Location: /workout-blog");
     }
     $title = "Login";
     $js = "login.js";
@@ -19,7 +19,7 @@ class PageController{
   }
   public function profile(){
     if(!isset($_SESSION['user_id'])){
-      header("Location: /workout_blog");
+      header("Location: /workout-blog");
     }
     $title = "Profile";
     $js = "profile.js";

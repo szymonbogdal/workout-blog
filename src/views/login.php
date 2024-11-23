@@ -14,6 +14,6 @@
   <div class="auth__footer">
     <p class="footer__msg" id="swapMessage">Don't have account?</p>
     <p class="footer__action" id="swapAction">Register</p>
-    <a class="footer__return" href="/workout_blog">Go back to main page</a>
+    <a class="footer__return" href="/workout-blog">Go back to main page</a>
   </div>
 </div>

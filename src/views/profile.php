@@ -10,7 +10,7 @@
       <p id ="likeCount"></p>
     </div>
     <button class="user-stats__button" id='modalNewOpen'>Create new workout plan</button>
-    <a class="user-stats__return" href="/workout_blog">Go back to main page</a>
+    <a class="user-stats__return" href="/workout-blog">Go back to main page</a>
   </div>
   <div class="content">
     <div class="filters">

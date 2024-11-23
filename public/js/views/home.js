@@ -49,7 +49,7 @@ const setupLikeBtns = () => {
       e.target.dataset.liked = initialLiked ? "false" : "true";
       likeCountElement.textContent = initialLiked ? initialLikeCount - 1 : initialLikeCount + 1;
   
-      const url = `http://localhost/workout_blog/api/workouts/${e.target.dataset.workout}/like`;
+      const url = `http://localhost/workout-blog/api/workouts/${e.target.dataset.workout}/like`;
       const result = await apiCall(url, "POST");
       
       if(!result || result.status === 'error'){
@@ -66,7 +66,7 @@ const getWorkouts = async () => {
   paginationContainer.style.display = "none";
   loader.style.display = "block";
 
-  const url = "http://localhost/workout_blog/api/workouts";
+  const url = "http://localhost/workout-blog/api/workouts";
   const result = await apiCall(url, "GET", state);
 
   loader.style.display = "none";
@@ -142,7 +142,7 @@ logoutBtn && logoutBtn.addEventListener('click', async() => {
   paginationContainer.style.display = "none";
   loader.style.display = "block";
   
-  const result = await apiCall("http://localhost/workout_blog/api/logout", "POST");
+  const result = await apiCall("http://localhost/workout-blog/api/logout", "POST");
   if(result?.status === 'success'){
     window.location.reload();
   }
@@ -153,7 +153,7 @@ logoutBtn && logoutBtn.addEventListener('click', async() => {
 })
 
 loginBtn && loginBtn.addEventListener('click', () => {
-  window.location.href = '/workout_blog/login';
+  window.location.href = '/workout-blog/login';
 })
 
 //Display/hide sidebar on smaller screens
@@ -170,7 +170,7 @@ seedDbBtn && seedDbBtn.addEventListener('click', async () => {
   paginationContainer.style.display = "none";
   loader.style.display = "block";
 
-  await apiCall("http://localhost/workout_blog/api/seed-db", "GET");
+  await apiCall("http://localhost/workout-blog/api/seed-db", "GET");
   window.location.reload();
 })
 

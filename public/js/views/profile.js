@@ -38,7 +38,7 @@ let activeBtnIndex = 0;
 
 //Display user statistics
 const getStatistics = async () => {
-  const url = `http://localhost/workout_blog/api/users/${window.userId}/statistics`;
+  const url = `http://localhost/workout-blog/api/users/${window.userId}/statistics`;
   const result = await apiCall(url, "GET");
   userNameField.innerHTML = result?.data?.username ? result.data.username : "username";
   postCount.innerHTML = result?.data?.workout_count ? `${formatNumber(result.data.workout_count)} posts` : "0 posts";
@@ -72,7 +72,7 @@ const setupLikeBtns = () => {
       e.target.dataset.liked = initialLiked ? "false" : "true";
       likeCountElement.textContent = initialLiked ? initialLikeCount - 1 : initialLikeCount + 1;
   
-      const url = `http://localhost/workout_blog/api/workouts/${e.target.dataset.workout}/like`;
+      const url = `http://localhost/workout-blog/api/workouts/${e.target.dataset.workout}/like`;
       const result = await apiCall(url, "POST");
       if(!result || result.status === 'error'){
         e.target.dataset.liked = initialLiked ? "true" : "false";
@@ -102,7 +102,7 @@ const getWorkouts = async () => {
   loaderContainer.style.display = "flex";
   
 
-  const url = "http://localhost/workout_blog/api/workouts";
+  const url = "http://localhost/workout-blog/api/workouts";
   const result = await apiCall(url, "GET", {...state, [currentAction]: window.userId});
   
   paginationContainer.style.display = "flex";
@@ -198,7 +198,7 @@ modalDeleteApprove.addEventListener('click', async () => {
   if(deleteWorkoutId != 0){
     loaderContainer.style.display = "flex";
     modalDelete.style.display = "none";
-    const url = `http://localhost/workout_blog/api/workouts/${deleteWorkoutId}`;
+    const url = `http://localhost/workout-blog/api/workouts/${deleteWorkoutId}`;
     const result = await apiCall(url, "DELETE");
     deleteWorkoutId = 0;
     if(result?.status == "success"){
@@ -228,7 +228,7 @@ modalNewContent.addEventListener('click', (e) => {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = new FormData(form);
-  const url = "http://localhost/workout_blog/api/workouts";
+  const url = "http://localhost/workout-blog/api/workouts";
   const result = await apiCall(url, "POST", formData);
   if(result?.status == 'success'){
     modalNew.style.display = "none";
