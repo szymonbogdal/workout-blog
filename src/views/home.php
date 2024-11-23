@@ -29,6 +29,7 @@
           echo "<a href='profile' class='profile-link'>Profile</a>";
           echo "<p class='profile-link' id='logoutButton'>Logout</p>";
         }else{
+          echo "<p class='profile-link' id='seedDb'>Populate Database</p>";
           echo "<p class='profile-link' id='loginButton'>Login</p>";
         }
       ?>

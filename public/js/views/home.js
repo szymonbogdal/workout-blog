@@ -14,6 +14,7 @@ const loginBtn = document.getElementById('loginButton');
 const sidebar = document.getElementById('sidebar');
 const sidebarOpenBtn = document.getElementById('sidebarOpenBtn');
 const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+const seedDbBtn = document.getElementById("seedDb");
 
 const responseError = `<p class="workout__response">There was some error. Please try again later.</p>`
 const responseEmpty = `<p class="workout__response">No workouts found.</p>`
@@ -157,6 +158,13 @@ sidebarOpenBtn.addEventListener('click', () => {
 })
 sidebarCloseBtn.addEventListener('click', () => {
   sidebar.classList.toggle('open');
+})
+
+//Popualte database button listener
+seedDbBtn && seedDbBtn.addEventListener('click', async () => {
+  loader.style.display = "block";
+  const result = await apiCall("http://localhost/workout_blog/api/seed-db", "GET");
+  window.location.reload();
 })
 
 //Initialize application
