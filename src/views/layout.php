@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/workout-blog/public/css/main.css">
   <?php
     if(isset($css)){
-      echo "<link rel='stylesheet' href='/workout-blog/public/css/views/$css' defer>";
+      echo "<link rel='stylesheet' href='/workout-blog/public/css/views/$css'>";
     }
     if(isset($js)){
       echo "<script type='module' src='/workout-blog/public/js/views/$js' defer></script>";
