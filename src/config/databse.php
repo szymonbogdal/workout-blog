@@ -2,7 +2,7 @@
 class Database{
   private $conn;
   private static $instance = null;
-  private $db = "php_workout_blog";
+  private $db = "workout_blog";
 
   public function __construct(){
     $host = "localhost";
