@@ -138,14 +138,18 @@ btnFilters.forEach((btn)=>{
 
 //Login/logout event listeners
 logoutBtn && logoutBtn.addEventListener('click', async() => {
+  workoutContainer.style.display = "none";
   paginationContainer.style.display = "none";
   loader.style.display = "block";
+  
   const result = await apiCall("http://localhost/workout_blog/api/logout", "POST");
   if(result?.status === 'success'){
     window.location.reload();
   }
-  loader.style.display = "none";
+
+  workoutContainer.style.display = "block";
   paginationContainer.style.display = "flex";
+  loader.style.display = "none";
 })
 
 loginBtn && loginBtn.addEventListener('click', () => {
@@ -162,8 +166,11 @@ sidebarCloseBtn.addEventListener('click', () => {
 
 //Popualte database button listener
 seedDbBtn && seedDbBtn.addEventListener('click', async () => {
+  workoutContainer.style.display = "none";
+  paginationContainer.style.display = "none";
   loader.style.display = "block";
-  const result = await apiCall("http://localhost/workout_blog/api/seed-db", "GET");
+
+  await apiCall("http://localhost/workout_blog/api/seed-db", "GET");
   window.location.reload();
 })
 
