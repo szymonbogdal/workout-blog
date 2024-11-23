@@ -14,15 +14,20 @@ const apiCall = async(url, method = "GET", params = {}) => {
       options.body = JSON.stringify(params);
     }
   }
-  try {
+  try{
     const response = await fetch(url, options);
-    if(!response.ok){
-      throw new Error(`HTTP errror ${response.status}`);
+    if(response.status === 204){
+      return {status: "success"};
     }
-    return await response.json();
-  }catch(error){
-    console.error(error);
-  }
+
+    const result = await response.json();
+    return{
+      status: response.ok ? "success" : "error",
+      ...result
+    }
+  }catch(e){
+    return {status: "error", message: "Unexpected error"}
+  } 
 }
 
 export default apiCall
