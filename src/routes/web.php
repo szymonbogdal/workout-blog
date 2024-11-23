@@ -3,6 +3,7 @@ require_once __DIR__ . '/../controllers/PageController.php';
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/WorkoutController.php';
 require_once __DIR__ . '/../controllers/UserController.php';
+require_once __DIR__ . '/../controllers/SeederController.php';
 class Router{
   private $routes = [
     'GET' => [
@@ -12,6 +13,8 @@ class Router{
 
       '/api/workouts' => 'WorkoutController@workouts',
       '/api/users/{user_id}/statistics' => 'UserController@getUserStatistics',
+
+      '/api/seed-db' => 'SeederController@seed'
     ],
     'POST' => [
       '/api/register' => 'AuthController@register',
