@@ -19,7 +19,7 @@ form.addEventListener('submit', async (e) => {
   if(isLogin && result?.status == 'success'){
     window.location.href = '/workout_blog';
   }else{
-    responseMsg.innerHTML = result.message ? result.message : "Something went wrong. Try again later";
+    responseMsg.innerHTML = result?.message ? result.message : "Something went wrong. Try again later";
   }
   loaderContainer.style.display = "none";
 });

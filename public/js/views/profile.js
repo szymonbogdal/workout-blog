@@ -40,9 +40,9 @@ let activeBtnIndex = 0;
 const getStatistics = async () => {
   const url = `http://localhost/workout_blog/api/users/${window.userId}/statistics`;
   const result = await apiCall(url, "GET");
-  userNameField.innerHTML = result?.username ? result.username : "username";
-  postCount.innerHTML = result?.workout_count ? `${formatNumber(result.workout_count)} posts` : "0 posts";
-  likeCount.innerHTML = result?.workout_likes ? `${formatNumber(result.workout_likes)} likes`: "0 likes";
+  userNameField.innerHTML = result?.data?.username ? result.data.username : "username";
+  postCount.innerHTML = result?.data?.workout_count ? `${formatNumber(result.data.workout_count)} posts` : "0 posts";
+  likeCount.innerHTML = result?.data?.workout_likes ? `${formatNumber(result.data.workout_likes)} likes`: "0 likes";
 }
 
 //Render pagination buttons and add event listener to change page
@@ -74,8 +74,7 @@ const setupLikeBtns = () => {
   
       const url = `http://localhost/workout_blog/api/workouts/${e.target.dataset.workout}/like`;
       const result = await apiCall(url, "POST");
-      
-      if(result?.status === 'error'){
+      if(!result || result.status === 'error'){
         e.target.dataset.liked = initialLiked ? "true" : "false";
         likeCountElement.textContent = initialLikeCount;
       }
@@ -105,7 +104,7 @@ const getWorkouts = async () => {
   const result = await apiCall(url, "GET", {...state, [currentAction]: window.userId});
 
   loaderContainer.style.display = "none";
-  if(result?.status == 'error'){
+  if(!result || result.status === 'error'){
     workoutContainer.insertAdjacentHTML('beforeend', responseError);  
     return;
   }
@@ -196,7 +195,7 @@ modalDeleteApprove.addEventListener('click', async () => {
     const url = `http://localhost/workout_blog/api/workouts/${deleteWorkoutId}`;
     const result = await apiCall(url, "DELETE");
     deleteWorkoutId = 0;
-    if(result?.status === "success"){
+    if(result?.status == "success"){
       state.page = 1;
       getWorkouts();
     }else{
@@ -206,7 +205,7 @@ modalDeleteApprove.addEventListener('click', async () => {
 })
 
 //Event listeners for new workout modal
-modalNewOpen.addEventListener('click', () => {
+modalNewOpen.addEventListener('click', async () => {
   modalNew.style.display = "block";
 })
 modalNewClose.addEventListener('click', () => {
@@ -229,7 +228,7 @@ form.addEventListener('submit', async (e) => {
     modalNew.style.display = "none";
     getWorkouts();
   }else{
-    responseMsg.innerHTML = result.message ? result.message : "Something went wrong. Try again later";
+    responseMsg.innerHTML = result?.message ? result.message : "Something went wrong. Try again later";
   }
 });
 
