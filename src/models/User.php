@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config/databse.php';
+require_once __DIR__ . '/../database/Database.php';
 class User{
   private $db;
   public function __construct(){
