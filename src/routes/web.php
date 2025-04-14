@@ -34,15 +34,22 @@ class Router{
     if(!isset($this->routes[$requestMethod])){
       return null;
     }
-
+    
+    //Parse JSON data from request body
+    $jsonParams = [];
+    if(($requestMethod === 'POST' || $requestMethod === 'PUT' || $requestMethod === 'PATCH') && 
+      isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false){
+        $inputJSON = file_get_contents('php://input');
+        $jsonParams = json_decode($inputJSON, true) ?: [];
+    }
+    
     //Check if there is identical route (no url parameters)
     if(isset($this->routes[$requestMethod][$requestUri])){
       return [
         'controller' => $this->routes[$requestMethod][$requestUri],
-        'params' => array_merge($_GET, $_POST)
+        'params' => array_merge($_GET, $_POST, $jsonParams)
       ];
     }
-
     //Find corresponding route including url parameters
     foreach($this->routes[$requestMethod] as $route => $controller){      
       //Get names of the uri parameters
@@ -65,7 +72,7 @@ class Router{
         }
         return [
           'controller' => $controller,
-          'params' =>  array_merge($urlParams, $_GET, $_POST)
+          'params' =>  array_merge($urlParams, $_GET, $_POST, $jsonParams)
         ];
       }
     }
