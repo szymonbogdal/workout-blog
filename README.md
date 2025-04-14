@@ -14,6 +14,7 @@ This is a Workout Blog Application built with pure PHP, JavaScript and CSS. The 
     - REST API built with PHP.
     - Single entry point routing system.
     - Server-side view rendering.
+    - Migration system with rollback option.
   - **Frontend**
     - Supports asynchronous API calls for real-time content updates.
     - Fully responsive design optimized for all device sizes, from desktops to small mobile screens.
@@ -36,5 +37,5 @@ Ensure XAMPP is installed and properly configured.
    - Restart the Apache server.
 2. Clone the repository to XAMPP's `htdocs` directory:
 3. Start XAMPP's Apache and MySQL services.
-4. Visit `http://localhost/workout-blog` in your browser.
-5. Database will be created automatically when you acess the application for the first time.
+4. run `php bin/migrate.php` to create the database and apply all migrations.
+5. Visit `http://localhost/workout-blog` in your browser.
